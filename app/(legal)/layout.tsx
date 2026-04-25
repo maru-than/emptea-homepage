@@ -8,21 +8,21 @@ export default function LegalLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col bg-white text-neutral-900">
-      <header className="border-b border-neutral-100">
+    <div className="flex min-h-screen flex-col bg-[var(--bg)] text-[var(--text)]">
+      <header className="border-b border-[var(--border)]">
         <div className="mx-auto flex h-16 max-w-[680px] items-center justify-between px-5 sm:h-20 sm:px-6">
           <Link
             href="/"
             aria-label="emptea studios, home"
-            className="inline-flex items-center text-neutral-900"
+            className="inline-flex items-center text-white"
           >
             <Logo className="h-[18px] w-auto" />
           </Link>
           <Link
             href="/"
-            className="text-sm text-neutral-500 transition-colors hover:text-neutral-900"
+            className="text-[12px] tracking-[0.22em] uppercase text-[var(--text-muted)] transition-colors hover:text-white"
           >
-            &larr; Back
+            ← Back
           </Link>
         </div>
       </header>

@@ -4,13 +4,13 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "emptea studios",
+  title: "emptea studios — Software, designed and built.",
   description:
-    "A software studio designing and building apps with precision and craft.",
+    "A small software studio. iOS apps and modern web, designed and built end-to-end.",
   openGraph: {
-    title: "emptea studios",
+    title: "emptea studios — Software, designed and built.",
     description:
-      "A software studio designing and building apps with precision and craft.",
+      "A small software studio. iOS apps and modern web, designed and built end-to-end.",
     type: "website",
   },
 };
@@ -19,7 +19,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#ffffff",
+  themeColor: "#0a0507",
 };
 
 export default function RootLayout({
@@ -30,9 +30,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${GeistSans.variable} ${GeistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
+      className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-white text-neutral-900">
+      <body className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
         {children}
       </body>
     </html>

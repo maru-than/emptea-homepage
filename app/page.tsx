@@ -1,21 +1,19 @@
-import { ContactCTA } from "@/components/contact-cta";
-import { Footer } from "@/components/footer";
+import { Contact } from "@/components/contact";
+import { FloatingNav } from "@/components/floating-nav";
 import { Hero } from "@/components/hero";
-import { Nav } from "@/components/nav";
-import { Philosophy } from "@/components/philosophy";
-import { Works } from "@/components/works";
+import { IntroLoader } from "@/components/intro-loader";
+import { Strengths } from "@/components/strengths";
+import { Work } from "@/components/work";
 
 export default function Page() {
   return (
-    <>
-      <Nav />
-      <main className="flex-1">
-        <Hero />
-        <Philosophy />
-        <Works />
-        <ContactCTA />
-      </main>
-      <Footer />
-    </>
+    <main className="relative bg-[var(--bg)]">
+      <IntroLoader />
+      <Hero />
+      <Strengths />
+      <Work />
+      <Contact />
+      <FloatingNav />
+    </main>
   );
 }
