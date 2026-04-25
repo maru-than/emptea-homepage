@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Footer } from "@/components/footer";
+import { Logo } from "@/components/logo";
 
 export default function LegalLayout({
   children,
@@ -7,28 +8,27 @@ export default function LegalLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground">
-      {/* Header */}
-      <header className="border-b border-border">
-        <div className="mx-auto flex h-20 max-w-[680px] items-center justify-between px-6">
+    <div className="flex min-h-screen flex-col bg-white text-neutral-900">
+      <header className="border-b border-neutral-100">
+        <div className="mx-auto flex h-16 max-w-[680px] items-center justify-between px-5 sm:h-20 sm:px-6">
           <Link
             href="/"
-            className="text-lg font-bold tracking-[-0.02em] text-foreground"
+            aria-label="emptea studios, home"
+            className="inline-flex items-center text-neutral-900"
           >
-            emptea studios
+            <Logo className="h-[18px] w-auto" />
           </Link>
           <Link
             href="/"
-            className="link-hover text-sm text-muted-foreground"
+            className="text-sm text-neutral-500 transition-colors hover:text-neutral-900"
           >
-            Back
+            &larr; Back
           </Link>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="flex-1 py-16 md:py-24">
-        <div className="mx-auto max-w-[680px] px-6">{children}</div>
+      <main className="flex-1 py-16 sm:py-24">
+        <div className="mx-auto max-w-[680px] px-5 sm:px-6">{children}</div>
       </main>
 
       <Footer />

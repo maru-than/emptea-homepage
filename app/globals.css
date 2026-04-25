@@ -1,104 +1,136 @@
 @import "tailwindcss";
 
+/*
+ * Emptea accent guardrails
+ * ------------------------
+ * Gradient fill allowed on: primary CTAs, pillar numerals, icon chips,
+ *   decorative orbs, small dot accents.
+ * Gradient text (.text-gradient): <=3 headline words per page, >=24px, >=600 weight.
+ * Forbidden: body copy, links, footer text, paragraph text.
+ * Body text: text-neutral-900 (headings), text-neutral-600 (body), text-neutral-500 (meta).
+ * Borders: border-neutral-200.
+ */
+
 :root {
-  --radius: 0;
-
-  --background: oklch(0.99 0 0);
-  --foreground: oklch(0.09 0 0);
-
-  --card: oklch(0.98 0 0);
-  --card-foreground: oklch(0.09 0 0);
-
-  --popover: oklch(0.99 0 0);
-  --popover-foreground: oklch(0.09 0 0);
-
-  --primary: oklch(0.09 0 0);
-  --primary-foreground: oklch(0.99 0 0);
-
-  --secondary: oklch(0.96 0 0);
-  --secondary-foreground: oklch(0.09 0 0);
-
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.40 0 0);
-
-  --accent: oklch(0.96 0 0);
-  --accent-foreground: oklch(0.09 0 0);
-
-  --destructive: oklch(0.55 0.2 25);
-  --destructive-foreground: oklch(0.99 0 0);
-
-  --border: oklch(0.88 0 0);
-  --input: oklch(0.88 0 0);
-  --ring: oklch(0.09 0 0);
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --grad-1: #2dd4bf;
+  --grad-2: #22d3ee;
+  --grad-3: #60a5fa;
+  --grad-4: #818cf8;
+  --grad-5: #a78bfa;
+  --emptea-gradient: linear-gradient(
+    90deg,
+    var(--grad-1) 0%,
+    var(--grad-2) 23.8%,
+    var(--grad-3) 47.6%,
+    var(--grad-4) 73.8%,
+    var(--grad-5) 100%
+  );
+  --emptea-gradient-radial: radial-gradient(
+    ellipse at center,
+    var(--grad-1) 0%,
+    var(--grad-2) 23.8%,
+    var(--grad-3) 47.6%,
+    var(--grad-4) 73.8%,
+    var(--grad-5) 100%
+  );
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
-  --font-mono: "SF Mono", "Menlo", "Monaco", "Consolas", monospace;
-
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-
-  --radius-sm: 0;
-  --radius-md: 0;
-  --radius-lg: 0;
-  --radius-xl: 0;
-  --radius-2xl: 0;
-  --radius-3xl: 0;
+  --color-muted-foreground: #525252;
+  --color-border: #e5e5e5;
+  --color-grad-1: var(--grad-1);
+  --color-grad-3: var(--grad-3);
+  --color-grad-5: var(--grad-5);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+.text-gradient {
+  background: var(--emptea-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-emptea-gradient {
+  background: var(--emptea-gradient);
+}
+
+.bg-emptea-gradient-radial {
+  background: var(--emptea-gradient-radial);
+}
+
+@keyframes emptea-orb-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
   }
-  body {
-    @apply bg-background text-foreground;
+  50% {
+    transform: translate3d(0, -2%, 0) scale(1.04);
   }
+}
+
+.emptea-orb {
+  animation: emptea-orb-drift 18s ease-in-out infinite;
+}
+
+/* Legacy utility classes used by legal page bodies */
+.heading-caption {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #737373;
+}
+
+.link-hover {
+  position: relative;
+  display: inline-block;
+}
+.link-hover::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background: #0a0a0a;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms ease-out;
+}
+.link-hover:hover::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
   }
-}
-
-@layer components {
-  .link-hover {
-    @apply relative inline-block;
+  .emptea-orb {
+    animation: none;
   }
-  .link-hover::after {
-    content: "";
-    @apply absolute bottom-0 left-0 h-px w-full bg-foreground origin-left scale-x-0 transition-transform duration-300 ease-out;
-  }
-  .link-hover:hover::after {
-    @apply scale-x-100;
-  }
-
-  .section-index {
-    @apply font-mono text-[0.8125rem] tracking-[0.02em] text-muted-foreground;
-  }
-
-  .heading-caption {
-    @apply text-xs font-medium uppercase tracking-[0.05em] text-muted-foreground;
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
   }
 }
