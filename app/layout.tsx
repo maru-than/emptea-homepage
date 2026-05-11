@@ -1,16 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
+import { Instrument_Serif } from "next/font/google";
 import "./globals.css";
 
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "emptea studios — Software, designed and built.",
-  description:
-    "A small software studio. iOS apps and modern web, designed and built end-to-end.",
+  title: "emptea studios",
+  description: "A creative software studio.",
   openGraph: {
-    title: "emptea studios — Software, designed and built.",
-    description:
-      "A small software studio. iOS apps and modern web, designed and built end-to-end.",
+    title: "emptea studios",
+    description: "A creative software studio.",
     type: "website",
   },
 };
@@ -19,7 +24,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#0a0507",
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({
@@ -31,11 +36,9 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}
+      className={`${instrumentSerif.variable} antialiased`}
     >
-      <body className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
-        {children}
-      </body>
+      <body className="min-h-screen bg-white text-black">{children}</body>
     </html>
   );
 }

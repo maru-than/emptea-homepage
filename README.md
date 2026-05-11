@@ -1,5 +1,7 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+> Package manager: **pnpm** (use `pnpm install` / `pnpm dev`, not npm).
+
 ## Overview
 
 This homepage showcases multiple apps from emptea studios, with support for Supabase Auth email confirmation for each app via dedicated subdirectories (e.g., `/rise/auth/confirm`).
