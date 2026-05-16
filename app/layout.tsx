@@ -17,12 +17,20 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://emptea.xyz"),
   title: "emptea studios",
   description: "Emptea studios, a powerhouse. Curious & industrial.",
   openGraph: {
     title: "emptea studios",
     description: "Emptea studios, a powerhouse. Curious & industrial.",
     type: "website",
+    url: "https://emptea.xyz",
+    siteName: "emptea studios",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "emptea studios",
+    description: "Emptea studios, a powerhouse. Curious & industrial.",
   },
 };
 
