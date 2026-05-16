@@ -1,13 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #ffffff;
-  --text: #000000;
-  --text-muted: rgba(0, 0, 0, 0.5);
-  --text-soft: rgba(0, 0, 0, 0.7);
+  --bg: #e7e5e4;
+  --text: #1c1917;
+  --text-muted: #a8a29e;
+  --accent: #7c2d12;
   --border: rgba(0, 0, 0, 0.1);
-  --border-strong: rgba(0, 0, 0, 0.2);
-  --accent: #000000;
 }
 
 html {
@@ -20,18 +18,21 @@ html {
   --color-bg: var(--bg);
   --color-text: var(--text);
   --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent);
 
-  /* Legacy tokens used by legal page bodies */
   --color-background: var(--bg);
   --color-foreground: var(--text);
   --color-muted-foreground: var(--text-muted);
+
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-eb-garamond), ui-serif, Georgia, serif;
 }
 
 @layer base {
   body {
     background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-instrument-serif), ui-serif, Georgia, serif;
+    color: var(--text-muted);
+    font-family: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
     font-weight: 400;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
@@ -46,7 +47,6 @@ html {
   text-wrap: pretty;
 }
 
-/* Legacy utility classes used by legal page bodies */
 .heading-caption {
   font-size: 0.6875rem;
   font-weight: 400;
@@ -58,20 +58,9 @@ html {
 .link-hover {
   position: relative;
   display: inline-block;
+  color: var(--text-muted);
+  transition: color 200ms ease-out;
+}
+.link-hover:hover {
   color: var(--text);
-}
-.link-hover::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 1px;
-  width: 100%;
-  background: var(--text);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 300ms ease-out;
-}
-.link-hover:hover::after {
-  transform: scaleX(1);
 }

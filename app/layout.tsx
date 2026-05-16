@@ -1,21 +1,27 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif } from "next/font/google";
+import { EB_Garamond, Geist } from "next/font/google";
 import "./globals.css";
 
-const instrumentSerif = Instrument_Serif({
+const ebGaramond = EB_Garamond({
   subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-instrument-serif",
+  weight: ["400"],
+  variable: "--font-eb-garamond",
+  display: "swap",
+});
+
+const geist = Geist({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-geist",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "emptea studios",
-  description: "A creative software studio.",
+  description: "Emptea studios, a powerhouse. Curious & industrial.",
   openGraph: {
     title: "emptea studios",
-    description: "A creative software studio.",
+    description: "Emptea studios, a powerhouse. Curious & industrial.",
     type: "website",
   },
 };
@@ -24,7 +30,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#ffffff",
+  themeColor: "#e7e5e4",
 };
 
 export default function RootLayout({
@@ -36,9 +42,9 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${instrumentSerif.variable} antialiased`}
+      className={`${ebGaramond.variable} ${geist.variable} antialiased`}
     >
-      <body className="min-h-screen bg-white text-black">{children}</body>
+      <body className="min-h-screen">{children}</body>
     </html>
   );
 }
