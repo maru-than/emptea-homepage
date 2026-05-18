@@ -3,10 +3,10 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Rise — emptea studios",
-  description: "Rise, a timeboxing app. Join the TestFlight.",
+  description: "Rise, a journal that understands you. Join the TestFlight.",
   openGraph: {
     title: "Rise — emptea studios",
-    description: "Rise, a timeboxing app. Join the TestFlight.",
+    description: "Rise, a journal that understands you. Join the TestFlight.",
     type: "website",
     url: "https://emptea.xyz/rise",
     siteName: "emptea studios",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Rise — emptea studios",
-    description: "Rise, a timeboxing app. Join the TestFlight.",
+    description: "Rise, a journal that understands you. Join the TestFlight.",
   },
 };
 
@@ -38,7 +38,7 @@ export default function RisePage() {
             Rise
           </h1>
           <p className="text-[16px] tracking-[-0.03em] text-[#a8a29e]">
-            A timeboxing app.
+            A journal that understands you.
           </p>
         </div>
 
