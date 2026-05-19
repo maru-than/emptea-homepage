@@ -3,9 +3,17 @@
   "configurations": [
     {
       "name": "next-dev",
-      "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["dev"],
-      "port": 3000
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["next", "dev"],
+      "port": 3000,
+      "autoPort": true
+    },
+    {
+      "name": "maruthan-com",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "/Users/maruthan/Documents/GitHub/maruthan-com", "run", "dev"],
+      "port": 3001,
+      "autoPort": true
     }
   ]
 }

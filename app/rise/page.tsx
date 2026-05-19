@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { RiseVideo } from "./RiseVideo";
 
 export const metadata: Metadata = {
   title: "Rise — emptea studios",
@@ -23,14 +24,7 @@ export default function RisePage() {
     <main className="relative flex min-h-screen flex-col items-center justify-center bg-[#e7e5e4] px-6 py-20 text-center">
       <div className="flex flex-col items-center gap-10">
         <div className="overflow-hidden rounded-[44px] bg-black shadow-[0_30px_80px_-20px_rgba(0,0,0,0.25)]">
-          <video
-            src="/rise.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="block aspect-[9/19.5] w-[260px] object-cover sm:w-[280px]"
-          />
+          <RiseVideo />
         </div>
 
         <div className="flex flex-col items-center gap-2">
