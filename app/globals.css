@@ -110,6 +110,12 @@
   --drop-shadow-2xl: 0 0 #0000;
 
   --default-border-width: 1px;
+
+  --color-ink: #f2f2f3;
+  --color-night: #000000;
+  --color-mist: #1c1c1e;
+  --color-raised: #2c2c2e;
+  --color-paper: #0b0b0c;
 }
 
 :root {
@@ -135,23 +141,24 @@
 }
 
 .dark {
-  --background: #171717;
+  color-scheme: dark;
+  --background: #0b0b0c;
   --foreground: #f2f2f2;
-  --card: #171717;
+  --card: #1c1c1e;
   --card-foreground: #f2f2f2;
-  --popover: #171717;
+  --popover: #1c1c1e;
   --popover-foreground: #f2f2f2;
   --primary: #f2f2f2;
   --primary-foreground: #171717;
-  --secondary: #4d4d4d;
+  --secondary: #2c2c2e;
   --secondary-foreground: #f2f2f2;
-  --muted: #4d4d4d;
+  --muted: #2c2c2e;
   --muted-foreground: #a8a8a8;
-  --accent: #4d4d4d;
+  --accent: #2c2c2e;
   --accent-foreground: #f2f2f2;
   --destructive: #f87275;
-  --border: #4d4d4d;
-  --input: #4d4d4d;
+  --border: #2c2c2e;
+  --input: #2c2c2e;
   --ring: #8f8f8f;
 }
 
@@ -190,245 +197,233 @@
   }
   body {
     @apply bg-background text-foreground;
+    letter-spacing: -0.03em;
   }
 }
 
-/* ── CD ──────────────────────────────────────────────────────────────
-   Geometry follows a real compact disc (values in % of the radius,
-   via `circle closest-side` so 100% = the rim):
-     hole 0–12.2 · clear hub 12.2–27 (semi-transparent through the mask)
-     stacking ring ~27 · mirror band 28–37.5 · data area 37.5–95
-     clear rim 95–100
-   The center hole and hub are cut with a shared alpha mask, so the
-   page shows through them. */
+
+/* ── Home ────────────────────────────────────────────────────────── */
+
+@utility text-display {
+  font-size: clamp(44px, 6.4vw, 80px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+
+@utility text-heading {
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+
+@utility text-title {
+  font-size: clamp(30px, 3vw, 40px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+
+@utility text-lead {
+  font-size: clamp(18px, 1.8vw, 24px);
+  line-height: 1.3;
+}
 
 @layer components {
-  .cd {
-    position: relative;
-    display: block;
+  /* warp streaks behind the hero devices */
+  .tunnel {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: inherit;
+  }
+
+  .tunnel::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    width: 140%;
     aspect-ratio: 1;
-    padding: 0;
-    border: 0;
-    background: none;
-    cursor: pointer;
-    /* hover scale + return path after a launch */
-    transition:
-      opacity 0.5s ease,
-      transform 0.35s ease;
-    /* shared cutout: hole → translucent hub → opaque disc → translucent rim */
-    --cd-cut: radial-gradient(
-      circle closest-side,
-      transparent 0 12.2%,
-      rgba(0, 0, 0, 0.55) 13% 26.8%,
-      #000 28.2% 97.2%,
-      rgba(0, 0, 0, 0.5) 98.4% 99.4%,
-      transparent 100%
-    );
-    /* iridescence + grooves live only in the data area */
-    --cd-data: radial-gradient(
-      circle closest-side,
-      transparent 0 37.5%,
-      #000 40% 94.5%,
-      transparent 97%
-    );
-  }
-
-  .cd:focus-visible {
-    outline: 2px solid var(--ring);
-    outline-offset: 6px;
-    border-radius: 50%;
-  }
-
-  .cd-spin {
-    position: absolute;
-    inset: 0;
-  }
-
-  .cd:hover,
-  .cd:focus-visible {
-    transform: scale(1.025);
-  }
-
-  /* launch: pulse to 1.1 and settle back while the spin winds up,
-     then lift off and fade */
-  .cd-launching {
-    pointer-events: none;
-    animation:
-      cd-pulse 0.5s ease forwards,
-      cd-rise 0.5s cubic-bezier(0.55, 0, 1, 0.45) 0.65s forwards;
-  }
-
-  .cd-launching .cd-spin {
-    animation: cd-launch-spin 1.15s cubic-bezier(0.8, 0, 1, 0.35) forwards;
-  }
-
-  .cd-face,
-  .cd-glare {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    mask-image: var(--cd-cut);
-  }
-
-  .cd-glare {
-    pointer-events: none;
-    /* stationary light: the disc spins underneath it */
+    transform: translate(-50%, -50%) scaleY(0.3);
     background:
-      radial-gradient(120% 120% at 30% 22%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 45%),
-      radial-gradient(140% 140% at 74% 86%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 42%);
-  }
-
-  .cd-face > * {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-  }
-
-  .cd-base {
-    background:
-      /* mirror band, slightly brighter than the data area */
-      radial-gradient(
-        circle closest-side,
-        transparent 27%,
-        rgba(255, 255, 255, 0.55) 30% 36%,
-        transparent 39.5%
-      ),
-      /* directional light across the aluminum */
-      linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 40%, rgba(23, 23, 23, 0.05) 100%),
-      radial-gradient(circle closest-side, #f7f7f7 0%, #eeeeee 34%, #e3e3e3 62%, #d8d8d8 84%, #cdcdcd 100%);
-  }
-
-  .cd-logo {
-    object-fit: cover;
-    mask-image: var(--cd-data);
-    opacity: 0.85;
-  }
-
-  .cd-iridescence {
-    mask-image: var(--cd-data);
-    background: conic-gradient(
-      from 205deg,
-      transparent 0deg,
-      rgba(96, 165, 250, 0.5) 28deg,
-      rgba(45, 212, 191, 0.45) 55deg,
-      rgba(232, 121, 249, 0.4) 95deg,
-      transparent 130deg 175deg,
-      rgba(253, 224, 71, 0.38) 205deg,
-      rgba(74, 222, 128, 0.32) 235deg,
-      rgba(125, 211, 252, 0.45) 268deg,
-      transparent 300deg 360deg
-    );
-    filter: blur(7px) saturate(1.15);
-  }
-
-  .cd-iridescence-b {
-    background: conic-gradient(
-      from 30deg,
-      transparent 0deg 40deg,
-      rgba(244, 114, 182, 0.32) 70deg,
-      rgba(129, 140, 248, 0.38) 100deg,
-      transparent 135deg 220deg,
-      rgba(45, 212, 191, 0.28) 250deg,
-      rgba(250, 204, 21, 0.25) 285deg,
-      transparent 320deg 360deg
-    );
-    filter: blur(10px) saturate(1.1);
-  }
-
-  .cd-grooves {
-    mask-image: var(--cd-data);
-    background:
-      /* radial "brushed" spokes — the sparkle when the disc turns */
-      repeating-conic-gradient(
-        rgba(255, 255, 255, 0.09) 0deg 0.4deg,
-        rgba(255, 255, 255, 0) 0.4deg 2.2deg
-      ),
-      /* the data track: hairline concentric rings */
-      repeating-radial-gradient(
-        circle closest-side,
-        rgba(255, 255, 255, 0.18) 0px,
-        rgba(23, 23, 23, 0.04) 1px,
-        rgba(255, 255, 255, 0) 2px
+      repeating-conic-gradient(from 0deg, rgba(255, 255, 255, 0.55) 0deg 0.5deg, rgba(255, 255, 255, 0) 0.5deg 2.4deg),
+      conic-gradient(
+        from 90deg,
+        #ff9ac1,
+        #ffc58a,
+        #fff1a1,
+        #a8f0c0,
+        #8fe3ff,
+        #a9a6ff,
+        #ff9ac1,
+        #ffc58a,
+        #fff1a1,
+        #a8f0c0,
+        #8fe3ff,
+        #a9a6ff,
+        #ff9ac1
       );
+    mask-image: radial-gradient(closest-side, transparent 20%, #000 38%, #000 52%, transparent 78%);
+    filter: blur(4px) saturate(1.15);
     opacity: 0.45;
   }
 
-  .cd-rings {
-    background: radial-gradient(
-      circle closest-side,
-      transparent 0 12.4%,
-      rgba(255, 255, 255, 0.9) 12.8% 13.4%,   /* hole rim highlight */
-      transparent 14.2% 25.6%,
-      rgba(23, 23, 23, 0.1) 26.2% 26.8%,      /* stacking ring shadow */
-      rgba(255, 255, 255, 0.8) 27.2% 27.8%,   /* stacking ring highlight */
-      transparent 28.6% 36.8%,
-      rgba(23, 23, 23, 0.07) 37.4% 37.9%,     /* data area starts */
-      transparent 38.6% 94.2%,
-      rgba(23, 23, 23, 0.06) 94.8% 95.3%,     /* data area ends */
-      transparent 96%,
-      rgba(23, 23, 23, 0.16) 98.6% 100%       /* rim shading */
-    );
+  .tunnel::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    width: 46%;
+    aspect-ratio: 2.2;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.3) 30%, rgba(255, 255, 255, 0) 70%);
+    filter: blur(14px);
   }
 
-  .cd-text {
-    display: block;
-    width: 100%;
+  /* status cards streaming out of the hero along the tunnel */
+  .fly {
+    position: absolute;
+    left: 50%;
+    top: 58%;
+    opacity: 0;
+    animation: fly var(--fly-duration, 9s) cubic-bezier(0.35, 0, 0.65, 1) infinite;
+    animation-delay: var(--fly-delay, 0s);
+  }
+
+  .cloud {
+    position: absolute;
+    border-radius: 9999px;
+    background: radial-gradient(ellipse at center, rgba(120, 150, 255, 0.12), rgba(120, 150, 255, 0) 68%);
+    filter: blur(6px);
+    pointer-events: none;
+  }
+
+  .marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee var(--marquee-duration, 60s) linear infinite;
+  }
+
+  /* fade marquee content in and out at the left/right edges */
+  .edge-fade {
+    mask-image: linear-gradient(90deg, transparent 0%, #000 20%, #000 80%, transparent 100%);
+  }
+
+  .fade-y {
+    mask-image: linear-gradient(180deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .marquee-wrap:hover .marquee {
+    animation-play-state: paused;
+  }
+
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .progress-ring {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: progress-ring var(--progress-duration, 6s) linear forwards;
+  }
+
+  .spotlight {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 260px;
     height: 100%;
-  }
-
-  .cd-title {
-    font-family: var(--font-mono);
-    font-size: 13.5px;
-    font-weight: 500;
-    letter-spacing: 3px;
-    fill: rgba(23, 23, 23, 0.78);
+    transform: translateX(-50%);
+    clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%);
+    background: linear-gradient(180deg, rgba(150, 170, 255, 0.05), rgba(150, 170, 255, 0.35));
+    filter: blur(14px);
+    pointer-events: none;
+    transition: left 0.5s ease;
   }
 }
 
-@keyframes cd-pulse {
-  0% {
-    transform: scale(1.025);
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
   }
-  20% {
-    transform: scale(1.1);
+
+  .shutter-bar {
+    animation: shutter linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 60%;
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+}
+
+@keyframes shutter {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes fly {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  15% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
   }
   100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes cd-launch-spin {
-  to {
-    transform: rotate(14turn);
-  }
-}
-
-@keyframes cd-rise {
-  to {
-    transform: translateY(-45vh) scale(1);
     opacity: 0;
+    transform: translate(calc(-50% + var(--fly-x)), calc(-50% + var(--fly-y))) scale(1.05);
   }
 }
 
-@keyframes cd-fade {
+@keyframes float {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes progress-ring {
   to {
-    opacity: 0;
+    stroke-dashoffset: 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cd,
-  .cd:hover,
-  .cd:focus-visible {
-    transition: none;
-    transform: none;
-  }
-
-  .cd-launching {
-    animation: cd-fade 0.5s ease forwards;
-  }
-
-  .cd-launching .cd-spin {
+  .marquee,
+  .float,
+  .fly,
+  .reveal,
+  .shutter-bar {
     animation: none;
   }
 }

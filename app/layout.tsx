@@ -1,12 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { GeistSans } from "geist/font/sans";
+import localFont from "next/font/local";
 import { GeistMono } from "geist/font/mono";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
-const title = "emptea — The powerhouse for the businesses of the future";
+const geist = localFont({
+  src: "./fonts/GeistVariableVF.woff2",
+  variable: "--font-geist-sans",
+  weight: "100 900",
+  display: "swap",
+});
+
+const title = "emptea — The toolkit for a better you";
 const description =
-  "Three apps for what AI giants won't touch — distribution, operations, and market intelligence.";
+  "Crank for strength, FlexMax for flexibility, Rise for a quiet mind. Native iPhone apps, made in Switzerland.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://emptea.xyz"),
@@ -18,15 +25,18 @@ export const metadata: Metadata = {
   applicationName: "emptea",
   keywords: [
     "emptea",
-    "Octo",
-    "Aris",
-    "Peck",
-    "vibecoding",
-    "app distribution",
-    "app operations",
-    "app market intelligence",
-    "indie hackers",
-    "AI tools",
+    "Crank",
+    "FlexMax",
+    "Rise",
+    "workout tracker",
+    "strength training app",
+    "stretching app",
+    "flexibility",
+    "mindfulness app",
+    "meditation",
+    "journaling",
+    "screen time",
+    "iPhone apps",
   ],
   authors: [{ name: "emptea studios" }],
   creator: "emptea studios",
@@ -56,7 +66,6 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  icons: { icon: "/favicon.ico" },
   formatDetection: { telephone: false, address: false, email: false },
 };
 
@@ -64,10 +73,8 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#171717" },
-  ],
+  colorScheme: "dark",
+  themeColor: "#0b0b0c",
 };
 
 export default function RootLayout({
@@ -76,7 +83,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      className={`dark ${geist.variable} ${GeistMono.variable}`}
     >
       <body className="antialiased">
         {children}

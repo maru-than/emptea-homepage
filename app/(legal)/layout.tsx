@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Mark } from "@/components/home/brand";
 
 export default function LegalLayout({
   children,
@@ -10,7 +11,8 @@ export default function LegalLayout({
     <div className="min-h-screen bg-background text-foreground">
       <header className="border-b">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link href="/" className="font-semibold">
+          <Link href="/" className="flex items-center gap-2 font-semibold">
+            <Mark className="size-5" />
             emptea
           </Link>
           <Button asChild size="sm" variant="outline">

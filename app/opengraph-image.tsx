@@ -1,8 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt =
-  "emptea — The powerhouse for the businesses of the future.";
+export const alt = "emptea — The toolkit for a better you.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -13,7 +12,7 @@ export default async function OG() {
         style={{
           width: "100%",
           height: "100%",
-          background: "#ffffff",
+          background: "#0b0b0c",
           display: "flex",
           flexDirection: "column",
           padding: "80px",
@@ -24,8 +23,8 @@ export default async function OG() {
           style={{
             fontSize: 28,
             fontWeight: 600,
-            color: "#171717",
-            letterSpacing: "-0.01em",
+            color: "#f2f2f3",
+            letterSpacing: "-0.03em",
           }}
         >
           emptea
@@ -37,26 +36,26 @@ export default async function OG() {
           style={{
             fontSize: 22,
             fontWeight: 500,
-            color: "#0072f5",
+            color: "#52aeff",
             marginBottom: 32,
           }}
         >
-          A suite for vibecoding
+          Apps for body and mind, made in Switzerland
         </div>
 
         <div
           style={{
             fontSize: 80,
             fontWeight: 600,
-            color: "#171717",
+            color: "#f2f2f3",
             lineHeight: 1.05,
-            letterSpacing: "-0.025em",
+            letterSpacing: "-0.03em",
             display: "flex",
             flexDirection: "column",
           }}
         >
-          <span>The powerhouse for the</span>
-          <span>businesses of the future.</span>
+          <span>The toolkit</span>
+          <span>for a better you.</span>
         </div>
 
         <div
@@ -69,11 +68,11 @@ export default async function OG() {
             alignItems: "center",
           }}
         >
-          <span style={{ color: "#0072f5" }}>Octo</span>
-          <span style={{ color: "#c9c9c9", fontWeight: 400 }}>·</span>
-          <span style={{ color: "#8e4ec6" }}>Aris</span>
-          <span style={{ color: "#c9c9c9", fontWeight: 400 }}>·</span>
-          <span style={{ color: "#45a557" }}>Peck</span>
+          <span style={{ color: "#f2f2f3" }}>Crank</span>
+          <span style={{ color: "#4d4d4d", fontWeight: 400 }}>·</span>
+          <span style={{ color: "#45a557" }}>FlexMax</span>
+          <span style={{ color: "#4d4d4d", fontWeight: 400 }}>·</span>
+          <span style={{ color: "#ff990a" }}>Rise</span>
         </div>
       </div>
     ),
