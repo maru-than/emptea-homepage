@@ -1,0 +1,32 @@
+# emptea
+
+> emptea studios is a small app studio in Switzerland making focused iPhone apps. Its first app is Crank, a fast workout tracker for strength training. Crank is free on the App Store.
+
+## Crank
+
+Crank is a native iPhone workout tracker built for speed.
+
+- Log sets in seconds with templates and folders (for example a Push / Pull / Legs split); Crank remembers the weight and reps from last time.
+- Body map: front and back, colored by the muscles you trained and the ones you skipped, weakest muscle first.
+- PRs and strength standards: every lift graded from beginner to elite, with the gap to the next tier.
+- Activity heatmap and a streak that counts weeks, not days.
+- Leaderboards by strength, volume or consistency, worldwide or among friends, plus a feed of shared workouts.
+- Share cards for Instagram Stories and group chats.
+- Rest timer as a Live Activity on the Lock Screen, Home Screen widgets, Apple Health sync (steps and bodyweight in, workouts out), Siri Shortcuts and Spotlight.
+- Hundreds of exercises with graphics, target muscles and full history; custom exercises.
+- 9 city themes with light and dark modes. Available in 28 languages.
+
+Download: https://apps.apple.com/app/id6757124183
+
+## More from emptea
+
+Two more apps are in development. Details have not been announced.
+
+## Links
+
+- [Website](https://emptea.xyz)
+- [Crank on the App Store](https://apps.apple.com/app/id6757124183)
+- [Privacy Policy](https://emptea.xyz/privacy-policy)
+- [Terms of Service](https://emptea.xyz/terms-of-service)
+- [EULA](https://emptea.xyz/eula)
+- Contact: emptea.studios@gmail.com

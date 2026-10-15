@@ -61,46 +61,16 @@ export function Wordmark({ className }: { className?: string }) {
   );
 }
 
-/** Small laurel branch drawn from leaves along an arc. */
-function Branch({ flip }: { flip?: boolean }) {
-  const leaves = Array.from({ length: 6 }, (_, i) => {
-    const t = i / 5;
-    const angle = (200 + t * 120) * (Math.PI / 180);
-    const x = 20 + Math.cos(angle) * 14;
-    const y = 22 + Math.sin(angle) * -16;
-    const rot = 200 + t * 120 - 90;
-    return { x, y, rot };
-  });
-  return (
-    <svg
-      viewBox="0 0 24 44"
-      className={cn("h-11 w-6 text-ink/70", flip && "-scale-x-100")}
-      aria-hidden="true"
-    >
-      {leaves.map((l, i) => (
-        <ellipse
-          key={i}
-          cx={l.x}
-          cy={l.y}
-          rx="2"
-          ry="4.4"
-          fill="currentColor"
-          transform={`rotate(${-l.rot} ${l.x} ${l.y})`}
-        />
-      ))}
-    </svg>
-  );
-}
-
+/** Award-style label between two laurel branches. */
 export function Laurel({ top, bottom }: { top: string; bottom: string }) {
   return (
-    <div className="flex items-center gap-1">
-      <Branch />
+    <div className="flex items-center gap-2">
+      <Image src="/laurel-leading.svg" alt="" width={11} height={22} unoptimized className="h-11 w-auto opacity-70" />
       <div className="text-center text-[13px] font-medium leading-tight text-ink/70">
         <p>{top}</p>
         <p>{bottom}</p>
       </div>
-      <Branch flip />
+      <Image src="/laurel-trailing.svg" alt="" width={11} height={22} unoptimized className="h-11 w-auto opacity-70" />
     </div>
   );
 }

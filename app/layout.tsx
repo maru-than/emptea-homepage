@@ -11,9 +11,9 @@ const geist = localFont({
   display: "swap",
 });
 
-const title = "emptea — The toolkit for a better you";
+const title = "emptea — The toolkit for a better you · Crank workout tracker";
 const description =
-  "Crank for strength, FlexMax for flexibility, Rise for a quiet mind. Native iPhone apps, made in Switzerland.";
+  "Crank is a fast iPhone workout tracker. Log sets in seconds, map every muscle, track PRs and streaks, and compare with friends. Free, made in Switzerland.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://emptea.xyz"),
@@ -23,25 +23,31 @@ export const metadata: Metadata = {
   },
   description,
   applicationName: "emptea",
+  category: "health & fitness",
   keywords: [
-    "emptea",
     "Crank",
-    "FlexMax",
-    "Rise",
+    "Crank app",
+    "emptea",
     "workout tracker",
+    "gym tracker app",
     "strength training app",
-    "stretching app",
-    "flexibility",
-    "mindfulness app",
-    "meditation",
-    "journaling",
-    "screen time",
+    "lifting log",
+    "workout log iPhone",
+    "PR tracker",
+    "muscle map",
+    "strength standards",
+    "workout streak",
+    "fitness leaderboard",
+    "Apple Health workout app",
     "iPhone apps",
+    "made in Switzerland",
   ],
-  authors: [{ name: "emptea studios" }],
+  authors: [{ name: "emptea studios", url: "https://emptea.xyz" }],
   creator: "emptea studios",
   publisher: "emptea studios",
   alternates: { canonical: "/" },
+  // iOS Safari shows the Smart App Banner for Crank
+  itunes: { appId: "6757124183" },
   openGraph: {
     type: "website",
     url: "https://emptea.xyz",

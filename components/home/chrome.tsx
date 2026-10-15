@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { APP_STORE, AppIcon, CONTACT, Mark, WAITLIST, Wordmark } from "@/components/home/brand";
+import { APP_STORE, AppIcon, CONTACT, WAITLIST, Wordmark } from "@/components/home/brand";
 import { cn } from "@/lib/utils";
 
 export function PillButton({
@@ -20,12 +19,11 @@ export function PillButton({
       asChild
       className={cn(
         "h-auto rounded-full bg-ink font-medium text-paper hover:bg-ink/90 [&_svg:not([class*='size-'])]:size-5",
-        size === "sm" ? "px-4 py-2 text-[16px]" : "px-[18px] py-3 text-[16px]",
+        size === "sm" ? "px-5 py-2 text-[16px]" : "px-6 py-3 text-[16px]",
         className,
       )}
     >
       <a href={href}>
-        <Mark className="size-5" />
         {children}
       </a>
     </Button>
@@ -47,7 +45,7 @@ export function Nav() {
             Crank
           </a>
           <PillButton href={APP_STORE} size="sm">
-            Get Crank
+            Get
           </PillButton>
         </div>
       </nav>
@@ -55,18 +53,18 @@ export function Nav() {
   );
 }
 
-/** Fixed App Store card, bottom right. */
-export function AccessCard() {
+/** Fixed "Join now" pill, bottom right: a raised, lit-from-above button. */
+export function JoinPill() {
   return (
     <a
       href={APP_STORE}
-      className="fixed bottom-4 right-4 z-40 hidden w-[240px] items-center gap-3 rounded-2xl bg-mist p-2 text-white ring-1 ring-inset ring-white/10 transition-transform hover:-translate-y-0.5 md:flex"
+      className="fixed bottom-5 right-5 z-40 flex items-center gap-2.5 rounded-full bg-gradient-to-b from-[#fafafa] to-[#d4d4d6] py-2 pl-2 pr-5 text-[16px] font-semibold text-[#111] shadow-[inset_0_1px_0_rgba(255,255,255,0.95),inset_0_-3px_6px_rgba(0,0,0,0.14),0_1px_2px_rgba(0,0,0,0.6),0_12px_28px_-8px_rgba(0,0,0,0.9)] ring-1 ring-black/40 transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.95),inset_0_-3px_6px_rgba(0,0,0,0.14),0_2px_4px_rgba(0,0,0,0.6),0_18px_36px_-10px_rgba(0,0,0,0.9)] active:translate-y-0 active:shadow-[inset_0_2px_6px_rgba(0,0,0,0.25),0_1px_2px_rgba(0,0,0,0.6)]"
     >
-      <AppIcon app="crank" className="w-16 shrink-0 rounded-xl shadow-none" />
-      <span className="flex flex-col gap-0.5">
-        <span className="text-[16px] font-semibold leading-tight">Get Crank</span>
-        <span className="text-[13px] leading-snug text-white/60">Free on the App Store. Made in Switzerland.</span>
-      </span>
+      <AppIcon
+        app="crank"
+        className="w-8 rounded-full shadow-[inset_0_1px_2px_rgba(0,0,0,0.2),0_1px_1px_rgba(255,255,255,0.8)]"
+      />
+      Join now
     </a>
   );
 }
@@ -123,7 +121,7 @@ const socials: { label: string; href: string; icon: React.ReactNode }[] = [
   },
   {
     label: "Instagram",
-    href: "",
+    href: "https://www.instagram.com/get.crank",
     icon: (
       <svg viewBox="0 0 24 24" className={glyph}>
         <rect x="3" y="3" width="18" height="18" rx="5" />
@@ -142,7 +140,6 @@ const socials: { label: string; href: string; icon: React.ReactNode }[] = [
       </svg>
     ),
   },
-  { label: "Email", href: CONTACT, icon: <Mail className="size-5" /> },
 ];
 
 export function Footer() {
@@ -180,7 +177,6 @@ export function Footer() {
               </li>
             ))}
         </ul>
-        <p className="text-[14px] text-ink/60">emptea.studios@gmail.com</p>
       </div>
     </footer>
   );

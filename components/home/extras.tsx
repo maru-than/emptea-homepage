@@ -16,7 +16,7 @@ const items = [
   {
     title: "Home screen widgets",
     body: "Today's workout, your streak, steps and one wise line a day.",
-    screen: <Shot src="/shots/crank-04.jpg" alt="Crank widgets on an iPhone home screen" sizes="300px" />,
+    screen: <Shot src="/screens/widgets.jpg" alt="Crank widgets on an iPhone home screen" sizes="300px" />,
   },
   {
     title: "Strength standards",
@@ -83,7 +83,7 @@ export function Extras() {
           <h2 className="text-heading">And there&apos;s more</h2>
           <p className="text-lead text-ink/60">Crank also comes with:</p>
         </div>
-        <ul ref={listRef} className="fade-y no-scrollbar relative flex h-[524px] flex-col gap-4 overflow-y-auto py-12">
+        <ul ref={listRef} data-lenis-prevent className="fade-y no-scrollbar relative flex h-[524px] flex-col gap-4 overflow-y-auto py-12">
           {items.map((item, i) => {
             const on = i === active;
             return (

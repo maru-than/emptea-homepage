@@ -191,6 +191,24 @@
   --color-ring: var(--ring);
 }
 
+/* Locomotive Scroll v5 (Lenis) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -249,7 +267,7 @@
     aspect-ratio: 1;
     transform: translate(-50%, -50%) scaleY(0.3);
     background:
-      repeating-conic-gradient(from 0deg, rgba(255, 255, 255, 0.55) 0deg 0.5deg, rgba(255, 255, 255, 0) 0.5deg 2.4deg),
+      repeating-conic-gradient(from 0deg, rgba(255, 255, 255, 0.25) 0deg 0.5deg, rgba(255, 255, 255, 0) 0.5deg 2.4deg),
       conic-gradient(
         from 90deg,
         #ff9ac1,
@@ -267,8 +285,8 @@
         #ff9ac1
       );
     mask-image: radial-gradient(closest-side, transparent 20%, #000 38%, #000 52%, transparent 78%);
-    filter: blur(4px) saturate(1.15);
-    opacity: 0.45;
+    filter: blur(6px) saturate(0.7);
+    opacity: 0.16;
   }
 
   .tunnel::after {
@@ -279,8 +297,8 @@
     width: 46%;
     aspect-ratio: 2.2;
     transform: translate(-50%, -50%);
-    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.3) 30%, rgba(255, 255, 255, 0) 70%);
-    filter: blur(14px);
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.06) 30%, rgba(255, 255, 255, 0) 70%);
+    filter: blur(18px);
   }
 
   /* status cards streaming out of the hero along the tunnel */
@@ -296,7 +314,7 @@
   .cloud {
     position: absolute;
     border-radius: 9999px;
-    background: radial-gradient(ellipse at center, rgba(120, 150, 255, 0.12), rgba(120, 150, 255, 0) 68%);
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 68%);
     filter: blur(6px);
     pointer-events: none;
   }
@@ -336,20 +354,6 @@
     stroke-dasharray: 100;
     stroke-dashoffset: 100;
     animation: progress-ring var(--progress-duration, 6s) linear forwards;
-  }
-
-  .spotlight {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    width: 260px;
-    height: 100%;
-    transform: translateX(-50%);
-    clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%);
-    background: linear-gradient(180deg, rgba(150, 170, 255, 0.05), rgba(150, 170, 255, 0.35));
-    filter: blur(14px);
-    pointer-events: none;
-    transition: left 0.5s ease;
   }
 }
 

@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "emptea — The toolkit for a better you.";
+export const alt = "emptea — The toolkit for a better you. Crank, the workout tracker for iPhone.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -40,7 +40,7 @@ export default async function OG() {
             marginBottom: 32,
           }}
         >
-          Apps for body and mind, made in Switzerland
+          Crank · the workout tracker for iPhone, made in Switzerland
         </div>
 
         <div
@@ -70,9 +70,7 @@ export default async function OG() {
         >
           <span style={{ color: "#f2f2f3" }}>Crank</span>
           <span style={{ color: "#4d4d4d", fontWeight: 400 }}>·</span>
-          <span style={{ color: "#45a557" }}>FlexMax</span>
-          <span style={{ color: "#4d4d4d", fontWeight: 400 }}>·</span>
-          <span style={{ color: "#ff990a" }}>Rise</span>
+          <span style={{ color: "#8f8f8f", fontWeight: 500 }}>Free on the App Store</span>
         </div>
       </div>
     ),

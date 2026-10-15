@@ -24,8 +24,8 @@ function Meter({ label, value, color }: { label: string; value: number; color: s
 /** Three columns of floating UI panels for the Crank analytics card. */
 export function TrainingCollage() {
   return (
-    <div className="grid h-full grid-cols-3 gap-3 overflow-hidden px-6 [mask-image:linear-gradient(transparent,#000_12%,#000_88%,transparent)]">
-      <div className="flex flex-col gap-3 pt-24">
+    <div className="grid h-full grid-cols-2 gap-3 md:grid-cols-3 overflow-hidden px-6 [mask-image:linear-gradient(transparent,#000_12%,#000_88%,transparent)]">
+      <div className="hidden flex-col gap-3 pt-24 md:flex">
         <p className="px-1 text-[11px] font-semibold text-ink/50">Volume by muscle</p>
         <Meter label="Chest" value={86} color="#f46c41" />
         <Meter label="Back" value={72} color="#415eee" />
