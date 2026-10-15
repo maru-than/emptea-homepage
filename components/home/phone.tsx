@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { BatteryFull, Check, ChevronRight, Search, Signal, Star, TrendingUp, Wifi } from "lucide-react";
+import { BatteryFull, Search, Signal, TrendingUp, Wifi } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /** iPhone 17 Pro Max frame from the Figma phone simulator. Width drives everything. */
@@ -51,29 +51,6 @@ export function Screen({ children }: { children: React.ReactNode }) {
 
 /* ── shared bits ─────────────────────────────────────────────────── */
 
-function Row({
-  title,
-  meta,
-  dot,
-  right,
-}: {
-  title: string;
-  meta: string;
-  dot: string;
-  right?: React.ReactNode;
-}) {
-  return (
-    <div className="flex items-center gap-3 rounded-2xl bg-mist px-3 py-2.5">
-      <span className="size-2 shrink-0 rounded-full" style={{ background: dot }} />
-      <div className="min-w-0 flex-1">
-        <p className="truncate text-[13px] font-semibold leading-tight">{title}</p>
-        <p className="truncate text-[11px] text-ink/60">{meta}</p>
-      </div>
-      {right ?? <ChevronRight className="size-4 text-ink/40" />}
-    </div>
-  );
-}
-
 function ScreenHeader({ title, sub }: { title: string; sub: string }) {
   return (
     <div className="mb-4">
@@ -93,20 +70,6 @@ function Toggle({ on }: { on: boolean }) {
     >
       <span className={cn("size-4 rounded-full bg-white transition-transform", on && "translate-x-4")} />
     </span>
-  );
-}
-
-function Bars({ values, color }: { values: number[]; color: string }) {
-  return (
-    <div className="flex h-24 items-end gap-1.5">
-      {values.map((v, i) => (
-        <span
-          key={i}
-          className="flex-1 rounded-t-md"
-          style={{ height: `${v}%`, background: color, opacity: 0.35 + (i / values.length) * 0.65 }}
-        />
-      ))}
-    </div>
   );
 }
 
@@ -168,60 +131,6 @@ export function FocusScreen() {
             <Toggle on={on} />
           </div>
         ))}
-      </div>
-    </div>
-  );
-}
-
-/* ── Crank extras, drawn by hand where no screenshot exists ─────── */
-
-/** Rest timer between sets. */
-export function RestScreen() {
-  return (
-    <div>
-      <ScreenHeader title="Rest" sub="Bench Press · set 3 of 4" />
-      <div className="mb-4 rounded-2xl bg-mist p-3">
-        <p className="text-[24px] font-semibold leading-none">1:51</p>
-        <p className="mb-3 text-[11px] text-ink/60">of 3:00 · also on your lock screen</p>
-        <Bars values={[100, 100, 100, 90, 70, 50, 30, 10]} color="#415eee" />
-      </div>
-      <div className="space-y-2">
-        <Row title="Last set" meta="95 kg × 5 · matched" dot="#31c46b" right={<Check className="size-4 text-[#31c46b]" />} />
-        <Row title="Next" meta="Bent Over Row · 82.5 kg × 8" dot="#f4a03b" />
-      </div>
-    </div>
-  );
-}
-
-/** Strength Wrapped, the yearly recap. */
-export function WrappedScreen() {
-  return (
-    <div className="grid grid-cols-2 gap-3 pt-2">
-      <div className="col-span-2 rounded-3xl bg-[#2f49d8] p-4 text-white">
-        <p className="text-[11px] text-white/60">Your 2026</p>
-        <p className="text-[28px] font-semibold leading-none">182 workouts</p>
-        <div className="mt-3">
-          <Bars values={[30, 42, 38, 55, 61, 58, 80]} color="#ffffff" />
-        </div>
-      </div>
-      <div className="aspect-square rounded-3xl bg-mist p-3">
-        <p className="text-[11px] text-ink/60">Lifted</p>
-        <p className="text-[24px] font-semibold leading-none">1.2M kg</p>
-      </div>
-      <div className="aspect-square rounded-3xl bg-[#31c46b]/20 p-3">
-        <p className="text-[11px] text-ink/60">Streak</p>
-        <p className="text-[24px] font-semibold leading-none">26 wk</p>
-      </div>
-      <div className="aspect-square rounded-3xl bg-[#7c6cf0]/25 p-3">
-        <p className="text-[11px] text-ink/60">Top lift</p>
-        <p className="text-[24px] font-semibold leading-none">180 kg</p>
-      </div>
-      <div className="aspect-square rounded-3xl bg-[#f46c41]/20 p-3">
-        <p className="text-[11px] text-ink/60">PRs</p>
-        <p className="flex items-center gap-1 text-[24px] font-semibold leading-none">
-          41
-          <Star className="size-4 fill-[#ff9500] text-[#ff9500]" strokeWidth={0} />
-        </p>
       </div>
     </div>
   );

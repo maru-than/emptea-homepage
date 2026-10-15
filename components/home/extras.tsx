@@ -3,13 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import {
-  Phone,
-  RestScreen,
-  Screen,
-  Shot,
-  WrappedScreen,
-} from "@/components/home/phone";
+import { Phone, Shot } from "@/components/home/phone";
 
 const DURATION = 6000;
 
@@ -17,7 +11,7 @@ const items = [
   {
     title: "Rest timer, everywhere",
     body: "A Live Activity on your lock screen, with 15 seconds more or less one tap away.",
-    screen: <Screen><RestScreen /></Screen>,
+    screen: <Shot src="/screens/rest-timer.jpg" alt="Crank rest timer Live Activity on the lock screen" sizes="300px" />,
   },
   {
     title: "Home screen widgets",
@@ -47,17 +41,17 @@ const items = [
   {
     title: "28 languages",
     body: "Sprichst du Deutsch? Parles-tu français? Crank does, and 26 more.",
-    screen: <Shot src="/shots/crank-05.jpg" alt="Crank analytics in German" sizes="300px" />,
+    screen: <Shot src="/screens/languages.jpg" alt="Crank analytics in German" sizes="300px" />,
   },
   {
     title: "9 themes",
     body: "Basel to Okinawa, each with a light and a dark side.",
-    screen: <Shot src="/shots/crank-02.jpg" alt="Crank appearance settings with city themes" sizes="300px" />,
+    screen: <Shot src="/screens/themes.jpg" alt="Crank appearance settings with city themes" sizes="300px" />,
   },
   {
     title: "Strength Wrapped",
     body: "Your year in lifts, every December.",
-    screen: <Screen><WrappedScreen /></Screen>,
+    screen: <Shot src="/screens/wrapped.jpg" alt="Crank recap of muscles levelled up this year" sizes="300px" />,
   },
 ];
 
