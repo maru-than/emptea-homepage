@@ -28,6 +28,7 @@ export function Hero() {
   const [slide, setSlide] = useState(0);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const id = setInterval(() => setSlide((s) => (s + 1) % slides.length), INTERVAL);
     return () => clearInterval(id);
   }, []);
@@ -35,20 +36,20 @@ export function Hero() {
   const current = slides[slide];
 
   return (
-    <section className="px-2 pt-2">
-      <div className="relative overflow-hidden rounded-t-3xl pt-12 md:pt-32">
+    <section data-hero className="px-2 pt-2">
+      <div className="relative overflow-hidden rounded-t-3xl pt-4 md:pt-32">
         <div className="absolute inset-x-0 top-0 h-[85%] rounded-3xl bg-gradient-to-b from-[#1c1c1e] to-paper" />
         <div className="cloud left-[-6%] top-[-4%] h-48 w-[40%]" />
         <div className="cloud right-[-4%] top-[2%] h-40 w-[36%]" />
         <div className="cloud left-[30%] top-[-8%] h-28 w-[30%] opacity-70" />
         <div className="tunnel" />
 
-        <div className="relative z-10 flex flex-col items-center gap-6 px-4 text-center">
+        <div className="relative z-10 flex flex-col items-center gap-2 px-4 text-center md:gap-6">
           <h1 className="text-display max-w-[760px]">The toolkit for a better you</h1>
           <p className="text-lead max-w-[600px] text-ink/60">
             Starting with Crank, the workout tracker built for speed. More is on the way.
           </p>
-          <PillButton href={APP_STORE} className="mt-2">
+          <PillButton href={APP_STORE} className="mt-1 md:mt-2">
             Get
           </PillButton>
         </div>
@@ -69,9 +70,9 @@ export function Hero() {
           ))}
         </div>
 
-        <div className="relative z-10 mx-auto mt-12 flex h-[520px] w-full max-w-[560px] justify-center md:h-[600px]">
+        <div className="relative z-10 mx-auto mt-3 flex w-full max-w-[560px] justify-center md:mt-12 md:h-[600px]">
           <div className="relative h-fit">
-            <Phone className="w-[290px] md:w-[320px]">
+            <Phone className="w-[190px] md:w-[320px]">
               {slides.map((s, i) => (
                 <div
                   key={s.src}
@@ -106,7 +107,7 @@ export function Hero() {
         </div>
 
         {/* fade the cut-off phone and halo into the next section */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-56 bg-gradient-to-b from-transparent to-paper" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 hidden h-56 bg-gradient-to-b from-transparent to-paper md:block" />
       </div>
     </section>
   );

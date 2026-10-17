@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { APP_STORE, AppIcon, CONTACT, WAITLIST, Wordmark } from "@/components/home/brand";
+import { APP_STORE, CONTACT, WAITLIST, Wordmark } from "@/components/home/brand";
 import { cn } from "@/lib/utils";
 
 export function PillButton({
@@ -50,22 +50,6 @@ export function Nav() {
         </div>
       </nav>
     </header>
-  );
-}
-
-/** Fixed "Join now" pill, bottom right: a raised, lit-from-above button. */
-export function JoinPill() {
-  return (
-    <a
-      href={APP_STORE}
-      className="fixed bottom-5 right-5 z-40 flex items-center gap-2.5 rounded-full bg-gradient-to-b from-[#fafafa] to-[#d4d4d6] py-2 pl-2 pr-5 text-[16px] font-semibold text-[#111] shadow-[inset_0_1px_0_rgba(255,255,255,0.95),inset_0_-3px_6px_rgba(0,0,0,0.14),0_1px_2px_rgba(0,0,0,0.6),0_12px_28px_-8px_rgba(0,0,0,0.9)] ring-1 ring-black/40 transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.95),inset_0_-3px_6px_rgba(0,0,0,0.14),0_2px_4px_rgba(0,0,0,0.6),0_18px_36px_-10px_rgba(0,0,0,0.9)] active:translate-y-0 active:shadow-[inset_0_2px_6px_rgba(0,0,0,0.25),0_1px_2px_rgba(0,0,0,0.6)]"
-    >
-      <AppIcon
-        app="crank"
-        className="w-8 rounded-full shadow-[inset_0_1px_2px_rgba(0,0,0,0.2),0_1px_1px_rgba(255,255,255,0.8)]"
-      />
-      Join now
-    </a>
   );
 }
 
@@ -144,7 +128,7 @@ const socials: { label: string; href: string; icon: React.ReactNode }[] = [
 
 export function Footer() {
   return (
-    <footer className="px-6 pb-16 pt-24 md:px-8">
+    <footer className="px-6 pb-16 pt-16 md:px-8 md:pt-24">
       <div className="mx-auto grid max-w-[1376px] gap-12 md:grid-cols-[2fr_1fr_1fr_1fr]">
         <div className="flex flex-col gap-2">
           <Wordmark />

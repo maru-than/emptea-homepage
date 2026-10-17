@@ -223,29 +223,47 @@ html.lenis body {
 /* ── Home ────────────────────────────────────────────────────────── */
 
 @utility text-display {
-  font-size: clamp(44px, 6.4vw, 80px);
+  font-size: 36px;
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   font-weight: 600;
+  @media (min-width: 768px) {
+    font-size: clamp(44px, 6.4vw, 80px);
+    letter-spacing: -0.03em;
+  }
 }
 
 @utility text-heading {
-  font-size: clamp(38px, 5vw, 64px);
+  font-size: 32px;
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   font-weight: 600;
+  @media (min-width: 768px) {
+    font-size: clamp(38px, 5vw, 64px);
+    letter-spacing: -0.03em;
+  }
 }
 
 @utility text-title {
-  font-size: clamp(30px, 3vw, 40px);
+  font-size: 32px;
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   font-weight: 600;
+  @media (min-width: 768px) {
+    font-size: clamp(30px, 3vw, 40px);
+    letter-spacing: -0.03em;
+  }
 }
 
 @utility text-lead {
-  font-size: clamp(18px, 1.8vw, 24px);
-  line-height: 1.3;
+  font-size: 16px;
+  line-height: 1.45;
+  letter-spacing: 0;
+  @media (min-width: 768px) {
+    font-size: clamp(18px, 1.8vw, 24px);
+    line-height: 1.3;
+    letter-spacing: -0.03em;
+  }
 }
 
 @layer components {
@@ -429,5 +447,28 @@ html.lenis body {
   .reveal,
   .shutter-bar {
     animation: none;
+  }
+}
+
+/* Short card sequence on phones. Desktop keeps the lg pin in StackedCards. */
+@media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+  .mobile-seq {
+    height: 170vh;
+  }
+
+  .mobile-seq-sticky {
+    position: sticky;
+    top: 0;
+    height: 78vh;
+  }
+
+  .mobile-seq-stage {
+    display: block;
+    height: 100%;
+  }
+
+  .mobile-seq-card {
+    position: absolute;
+    inset: 0;
   }
 }

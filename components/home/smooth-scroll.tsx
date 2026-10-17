@@ -2,22 +2,26 @@
 
 import { useEffect } from "react";
 
-/** Locomotive Scroll v5 on the whole page; skipped for reduced motion. */
+/** Locomotive Scroll v5. Off for reduced motion, and for coarse pointers below md. */
 export function SmoothScroll() {
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
     const md = window.matchMedia("(min-width: 768px)");
+    const coarse = window.matchMedia("(pointer: coarse)");
     let scroll: { destroy(): void } | undefined;
     let cancelled = false;
     let generation = 0;
+
+    const want = () => !reduce.matches && !(coarse.matches && !md.matches);
 
     const start = () => {
       const gen = ++generation;
       scroll?.destroy();
       scroll = undefined;
+      if (!want()) return;
       import("locomotive-scroll").then(({ default: LocomotiveScroll }) => {
-        if (cancelled || gen !== generation) return;
-        // Desktop offset clears the fixed nav. Phones have no nav, so keep only a small inset.
+        if (cancelled || gen !== generation || !want()) return;
+        // Desktop offset clears the fixed nav. A narrow fine pointer still has no nav.
         scroll = new LocomotiveScroll({
           lenisOptions: { lerp: 0.1, anchors: { offset: md.matches ? -96 : -16 } },
         });
@@ -25,11 +29,15 @@ export function SmoothScroll() {
     };
 
     start();
+    reduce.addEventListener("change", start);
     md.addEventListener("change", start);
+    coarse.addEventListener("change", start);
     return () => {
       cancelled = true;
       generation += 1;
+      reduce.removeEventListener("change", start);
       md.removeEventListener("change", start);
+      coarse.removeEventListener("change", start);
       scroll?.destroy();
     };
   }, []);
