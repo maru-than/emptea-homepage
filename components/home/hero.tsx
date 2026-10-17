@@ -36,7 +36,7 @@ export function Hero() {
 
   return (
     <section className="px-2 pt-2">
-      <div className="relative overflow-hidden rounded-t-3xl pt-28 md:pt-32">
+      <div className="relative overflow-hidden rounded-t-3xl pt-12 md:pt-32">
         <div className="absolute inset-x-0 top-0 h-[85%] rounded-3xl bg-gradient-to-b from-[#1c1c1e] to-paper" />
         <div className="cloud left-[-6%] top-[-4%] h-48 w-[40%]" />
         <div className="cloud right-[-4%] top-[2%] h-40 w-[36%]" />

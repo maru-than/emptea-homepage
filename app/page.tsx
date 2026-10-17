@@ -185,7 +185,7 @@ export default function Page() {
         </section>
 
         {/* Apps */}
-        <section id="apps" className="scroll-mt-24 overflow-hidden pb-40">
+        <section id="apps" className="scroll-mt-4 overflow-hidden pb-40 md:scroll-mt-24">
           <Container className="flex flex-col gap-20">
             <SectionHead
               title={
@@ -292,7 +292,7 @@ export default function Page() {
 
         {/* Crank, dark */}
         <div className="relative">
-          <section id="crank" className="scroll-mt-24 bg-night pt-40 text-white lg:pt-32">
+          <section id="crank" className="scroll-mt-4 bg-night pt-40 text-white md:scroll-mt-24 lg:pt-32">
             <Container className="flex flex-col gap-16 lg:gap-0">
               <SectionHead
                 title={

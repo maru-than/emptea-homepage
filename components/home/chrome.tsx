@@ -32,7 +32,7 @@ export function PillButton({
 
 export function Nav() {
   return (
-    <header className="fixed inset-x-0 top-4 z-50 flex justify-center px-4">
+    <header className="fixed inset-x-0 top-4 z-50 hidden justify-center px-4 md:flex">
       <nav className="flex items-center gap-2 rounded-[32px] bg-mist/70 p-2 ring-1 ring-inset ring-white/10 text-[18px] font-medium text-ink backdrop-blur-xl">
         <Link href="/" className="px-4 py-1.5" aria-label="emptea home">
           <Wordmark />
