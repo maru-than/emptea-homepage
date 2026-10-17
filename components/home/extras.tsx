@@ -102,10 +102,12 @@ export function Extras() {
                   )}
                 >
                   <span className={cn("flex flex-col gap-2 transition-opacity", !on && "opacity-50")}>
-                    <span className="text-[24px] font-semibold leading-[0.9]">
+                    <span className="text-[20px] font-semibold leading-tight tracking-normal md:text-[24px] md:leading-[0.9] md:tracking-[-0.03em]">
                       {item.title}
                     </span>
-                    <span className="text-[18px] font-medium leading-snug text-ink/60">{item.body}</span>
+                    <span className="text-base font-medium leading-[1.45] tracking-normal text-ink/60 md:text-[18px] md:leading-snug">
+                      {item.body}
+                    </span>
                   </span>
                   {on ? (
                     <svg viewBox="0 0 36 36" className="size-9 shrink-0 -rotate-90" aria-hidden="true">

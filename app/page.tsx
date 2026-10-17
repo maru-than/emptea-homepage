@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { HeartPulse, LayoutGrid, Mic, Search, Timer } from "lucide-react";
 import { APP_STORE, AppIcon, type AppId, Laurel } from "@/components/home/brand";
-import { Footer, JoinPill, Nav, PillButton } from "@/components/home/chrome";
+import { Footer, Nav, PillButton } from "@/components/home/chrome";
+import { JoinPill } from "@/components/home/join-pill";
 import { Extras } from "@/components/home/extras";
 import { Hero } from "@/components/home/hero";
 import { TrainingCollage } from "@/components/home/panels";
@@ -125,7 +126,7 @@ const insights = [
 
 export default function Page() {
   return (
-    <div className="bg-paper text-ink">
+    <div className="bg-paper text-ink tracking-normal md:tracking-[-0.03em]">
       <StructuredData />
       <SmoothScroll />
       <Nav />
@@ -135,10 +136,10 @@ export default function Page() {
         <Hero />
 
         {/* Platforms */}
-        <section className="pt-24">
+        <section className="pt-16 md:pt-24">
           <Container className="flex flex-col items-center gap-6">
             <h2 className="text-[24px] font-semibold leading-[0.9]">Made for iPhone, works with</h2>
-            <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-[18px] font-semibold text-ink/80">
+            <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-base font-medium leading-[1.45] tracking-normal text-ink/80 md:text-[18px] md:font-semibold md:leading-none md:tracking-[-0.03em]">
               {platforms.map(({ icon: Icon, label }) => (
                 <li key={label} className="flex items-center gap-2">
                   <Icon className="size-5" strokeWidth={2.25} />
@@ -150,8 +151,8 @@ export default function Page() {
         </section>
 
         {/* Showcase */}
-        <section className="py-40">
-          <Container className="flex flex-col items-center gap-10">
+        <section className="py-16 md:py-40">
+          <Container className="flex flex-col items-center gap-8 md:gap-10">
             <div className="flex gap-8">
               <Laurel top="Made in" bottom="Switzerland" />
               <Laurel top="Available in" bottom="28 languages" />
@@ -166,7 +167,23 @@ export default function Page() {
               }
             />
           </Container>
-          <div className="marquee-wrap edge-fade mt-12 overflow-hidden py-12">
+          <div
+            className="no-scrollbar mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:hidden"
+            role="region"
+            aria-label="Crank screens"
+          >
+            {showcase.slice(0, 4).map((shot) => (
+              <figure key={shot.src} className="w-[74%] max-w-[280px] shrink-0 snap-center">
+                <Phone className="w-full">
+                  <Shot src={shot.src} alt={shot.alt} sizes="280px" />
+                </Phone>
+                <figcaption className="mt-3 text-center text-base leading-[1.45] tracking-normal text-ink/70">
+                  {shot.alt}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <div className="marquee-wrap edge-fade mt-12 hidden overflow-hidden py-12 md:block">
             <div
               className="marquee gap-8 pr-8 md:gap-10 md:pr-10"
               style={{ "--marquee-duration": "70s" } as React.CSSProperties}
@@ -185,8 +202,8 @@ export default function Page() {
         </section>
 
         {/* Apps */}
-        <section id="apps" className="scroll-mt-4 overflow-hidden pb-40 md:scroll-mt-24">
-          <Container className="flex flex-col gap-20">
+        <section id="apps" className="scroll-mt-4 overflow-hidden pb-16 md:scroll-mt-24 md:pb-40">
+          <Container className="flex flex-col gap-10 md:gap-20">
             <SectionHead
               title={
                 <>
@@ -235,7 +252,7 @@ export default function Page() {
                     <div className="relative flex flex-col gap-2">
                       <p className="text-[16px] font-medium text-amber-600">In development</p>
                       <h3 className="text-title">{t.name}</h3>
-                      <p className="text-[18px] leading-snug text-ink/60">{t.hint}</p>
+                      <p className="text-base leading-[1.45] tracking-normal text-ink/60 md:text-[18px] md:leading-snug">{t.hint}</p>
                     </div>
                   </article>
                 ))}
@@ -292,7 +309,7 @@ export default function Page() {
 
         {/* Crank, dark */}
         <div className="relative">
-          <section id="crank" className="scroll-mt-4 bg-night pt-40 text-white md:scroll-mt-24 lg:pt-32">
+          <section id="crank" className="scroll-mt-4 bg-night pt-16 text-white md:scroll-mt-24 md:pt-40 lg:pt-32">
             <Container className="flex flex-col gap-16 lg:gap-0">
               <SectionHead
                 title={
@@ -315,8 +332,8 @@ export default function Page() {
                       <h3 className="text-heading">{card.title}</h3>
                       <p className="text-lead max-w-[420px] text-ink/60">{card.body}</p>
                     </div>
-                    <div className="flex h-[520px] justify-center overflow-hidden lg:h-auto">
-                      <Phone className="w-[290px] translate-y-14">{card.screen}</Phone>
+                    <div className="flex h-[38vh] max-h-[280px] justify-center overflow-hidden md:h-[520px] md:max-h-none lg:h-auto">
+                      <Phone className="w-[42vw] max-w-[180px] translate-y-3 md:w-[290px] md:max-w-none md:translate-y-14">{card.screen}</Phone>
                     </div>
                   </article>
                 ))}
@@ -333,7 +350,7 @@ export default function Page() {
         </div>
 
         {/* Extras */}
-        <section className="py-40">
+        <section className="py-16 md:py-40">
           <Container>
             <Extras />
           </Container>
