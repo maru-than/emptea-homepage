@@ -212,7 +212,7 @@ export default function Page() {
                   starting with Crank
                 </>
               }
-              body="Focused tools for the parts of life that compound. Crank is out now, two more are in the works."
+              body="Focused tools for the parts of life that compound. Crank is out now, friggy is next, two more are in the works."
             />
 
             <div className="grid gap-4 lg:h-[740px] lg:grid-cols-3">
@@ -258,6 +258,32 @@ export default function Page() {
                 ))}
               </div>
             </div>
+
+            <article
+              id="friggy"
+              className="reveal relative grid scroll-mt-4 overflow-hidden rounded-3xl bg-mist md:scroll-mt-24 lg:h-[658px] lg:grid-cols-2"
+              style={bottomGlow}
+            >
+              <span
+                aria-hidden="true"
+                className="absolute -left-24 -top-24 size-96 rounded-full opacity-20 blur-3xl"
+                style={{ background: "#ff592d" }}
+              />
+              <div className="relative order-2 flex h-[560px] justify-center lg:order-1 lg:h-auto">
+                <Phone className="w-[290px] translate-y-16">
+                  <Shot src="/screens/friggy-explore.jpg" alt="friggy Explore tab with recipes for what's in the fridge" sizes="290px" />
+                </Phone>
+              </div>
+              <div className="relative order-1 flex flex-col justify-center gap-4 p-8 md:p-16 lg:order-2">
+                <AppIcon app="friggy" className="w-16" />
+                <p className="text-[16px] font-medium text-amber-600">Coming soon to the App Store</p>
+                <h3 className="text-heading">friggy</h3>
+                <p className="text-lead max-w-[420px] text-ink/60">Snap your fridge. Find your next meal.</p>
+                <p className="max-w-[420px] text-base leading-[1.45] tracking-normal text-ink/60 md:text-[18px] md:leading-snug">
+                  Three recipes from what you already have, a timer while you cook and a log of every plate.
+                </p>
+              </div>
+            </article>
 
             <article className="reveal grid overflow-hidden rounded-3xl bg-mist lg:h-[658px] lg:grid-cols-2" style={bottomGlow}>
               <div className="flex flex-col justify-center gap-4 p-8 md:p-16">

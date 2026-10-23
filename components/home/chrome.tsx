@@ -58,6 +58,7 @@ const footerCols = [
     title: "Apps",
     links: [
       { label: "Crank", href: "#crank" },
+      { label: "friggy", href: "#friggy" },
       { label: "FlexMax", href: "#apps" },
       { label: "Rise", href: "#apps" },
     ],
@@ -68,6 +69,7 @@ const footerCols = [
       { label: "App Store", href: APP_STORE },
       { label: "Waitlist", href: WAITLIST },
       { label: "Contact", href: CONTACT },
+      { label: "Support", href: "/support" },
     ],
   },
   {

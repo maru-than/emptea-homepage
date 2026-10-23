@@ -7,28 +7,31 @@ export const WAITLIST = "mailto:emptea.studios@gmail.com?subject=FlexMax%20and%2
 export const CONTACT = "mailto:emptea.studios@gmail.com";
 
 export const apps = {
-  crank: { name: "Crank", icon: null, mark: "/crank-mark.svg", from: "#ffffff", to: "#f4f4f5" },
-  flexmax: { name: "FlexMax", icon: PersonStanding, mark: null, from: "#5fdc8a", to: "#1f9e52" },
-  rise: { name: "Rise", icon: Sunrise, mark: null, from: "#ffb27a", to: "#f0612e" },
+  crank: { name: "Crank", icon: null, mark: "/crank-mark.svg", image: null, from: "#ffffff", to: "#f4f4f5" },
+  friggy: { name: "friggy", icon: null, mark: null, image: "/friggy-icon.png", from: "#fffdf5", to: "#fffdf5" },
+  flexmax: { name: "FlexMax", icon: PersonStanding, mark: null, image: null, from: "#5fdc8a", to: "#1f9e52" },
+  rise: { name: "Rise", icon: Sunrise, mark: null, image: null, from: "#ffb27a", to: "#f0612e" },
 };
 
 export type AppId = keyof typeof apps;
 
 /** App icon tile, sized by className width. */
 export function AppIcon({ app, className }: { app: AppId; className?: string }) {
-  const { icon: Icon, mark, from, to, name } = apps[app];
+  const { icon: Icon, mark, image, from, to, name } = apps[app];
   return (
     <span
       role="img"
       aria-label={name}
       className={cn(
         "relative flex aspect-square w-20 items-center justify-center overflow-hidden rounded-[22.5%] shadow-[0_24px_48px_-20px_rgba(31,32,37,0.5)]",
-        mark && "ring-1 ring-inset ring-night/10",
+        (mark || image) && "ring-1 ring-inset ring-night/10",
         className,
       )}
       style={{ background: `linear-gradient(160deg, ${from}, ${to})` }}
     >
-      {mark ? (
+      {image ? (
+        <Image src={image} alt="" fill sizes="128px" className="object-cover" />
+      ) : mark ? (
         <Image src={mark} alt="" width={392} height={741} className="relative h-[58%] w-auto" />
       ) : (
         <>
