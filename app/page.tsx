@@ -1,124 +1,141 @@
 import Image from "next/image";
-import { HeartPulse, LayoutGrid, Mic, Search, Timer } from "lucide-react";
-import { APP_STORE, AppIcon, type AppId, Laurel } from "@/components/home/brand";
-import { Footer, JoinPill, Nav, PillButton } from "@/components/home/chrome";
-import { Extras } from "@/components/home/extras";
+import { Check, HeartPulse, Languages, LayoutGrid, Mic, Search, SlidersHorizontal, Timer } from "lucide-react";
+import { APP_STORE, AppIcon, type AppId, CONTACT, Mark, WAITLIST } from "@/components/home/brand";
+import { Footer, Nav, Pill } from "@/components/home/chrome";
+import { Faq } from "@/components/home/faq";
+import { CheckList, Container, FeatureRow, MockCard, Panel, SectionTitle, Stat } from "@/components/home/feature";
 import { Hero } from "@/components/home/hero";
-import { TrainingCollage } from "@/components/home/panels";
 import { Phone, Shot } from "@/components/home/phone";
-import { SmoothScroll } from "@/components/home/smooth-scroll";
-import { StackedCards } from "@/components/home/stack";
 import { StructuredData } from "@/components/home/structured-data";
 import { cn } from "@/lib/utils";
-
-// Neutral light falling onto the lower edge of a card.
-const bottomGlow = {
-  backgroundImage: "linear-gradient(rgba(255,255,255,0) 40%, rgba(255,255,255,0.03) 80%, rgba(255,255,255,0.07))",
-};
-
-const cornerGlow = {
-  backgroundImage: "radial-gradient(circle at 75% 100%, rgba(255,255,255,0.09), rgba(255,255,255,0.04) 20%, rgba(255,255,255,0) 64%)",
-};
-
-function Container({ className, children }: { className?: string; children: React.ReactNode }) {
-  return <div className={cn("mx-auto w-full max-w-[1376px] px-4 md:px-8", className)}>{children}</div>;
-}
-
-function SectionHead({ title, body }: { title: React.ReactNode; body?: string }) {
-  return (
-    <div className="reveal mx-auto flex max-w-[720px] flex-col items-center gap-4 text-center">
-      <h2 className="text-heading">{title}</h2>
-      {body && <p className="text-lead text-ink/60">{body}</p>}
-    </div>
-  );
-}
 
 /* ── data ────────────────────────────────────────────────────────── */
 
 const platforms = [
   { icon: LayoutGrid, label: "Widgets" },
+  { icon: SlidersHorizontal, label: "Controls" },
   { icon: Timer, label: "Live Activities" },
   { icon: HeartPulse, label: "Apple Health" },
   { icon: Mic, label: "Siri Shortcuts" },
   { icon: Search, label: "Spotlight" },
 ];
 
-// Real Crank screens, shown in phones. Swap a src for an .mp4 to play a clip instead.
 const showcase = [
-  { src: "/screens/home-body.jpg", alt: "Body map colored by trained muscles" },
-  { src: "/screens/workout-hub.jpg", alt: "Workout tab with today's plan" },
-  { src: "/screens/home-charts.jpg", alt: "Charts with the training heatmap" },
-  { src: "/screens/exercise-squat.jpg", alt: "Exercise page for the barbell squat" },
-  { src: "/screens/leaderboard.jpg", alt: "Leaderboard of top athletes" },
-  { src: "/screens/home-standards.jpg", alt: "PR standards per muscle" },
-  { src: "/screens/activity.jpg", alt: "Activity heatmap for the year" },
-  { src: "/screens/share-card.jpg", alt: "Share card ready for Instagram Stories" },
-  { src: "/screens/rest-timer.jpg", alt: "Rest timer Live Activity on the lock screen" },
-  { src: "/screens/themes.jpg", alt: "Appearance settings with city themes" },
-  { src: "/screens/languages.jpg", alt: "Analytics in German" },
-  { src: "/screens/profile.jpg", alt: "Profile with workout history" },
+  { src: "/screens/body-front.jpg", alt: "Body map colored by trained muscles" },
+  { src: "/screens/plan-hub.jpg", alt: "Workout tab with today's plan" },
+  { src: "/screens/analytics-charts.jpg", alt: "Analytics with bodyweight, steps and volume charts" },
+  { src: "/screens/exercise-bench.jpg", alt: "Exercise page for the barbell bench press" },
+  { src: "/screens/leaderboard-world.jpg", alt: "Worldwide leaderboard podium" },
+  { src: "/screens/standards.jpg", alt: "PR standards per muscle" },
+  { src: "/screens/activity-year.jpg", alt: "Activity heatmap for the year" },
+  { src: "/screens/workout-share-card.jpg", alt: "Workout share card" },
+  { src: "/screens/live-activity-lockscreen.jpg", alt: "Rest timer Live Activity on the Lock Screen" },
+  { src: "/screens/appearance-themes.jpg", alt: "Appearance settings with city themes" },
+  { src: "/screens/compare.jpg", alt: "Head-to-head comparison with a friend" },
+  { src: "/screens/profile-history.jpg", alt: "Profile with workout history" },
 ];
 
-// FlexMax and Rise are still under wraps: a name and a hint, nothing more.
-const teasers: { app: AppId; name: string; hint: string; glow: string }[] = [
-  { app: "flexmax", name: "FlexMax", hint: "Something for flexibility. That's all we'll say for now.", glow: "#1f9e52" },
-  { app: "rise", name: "Rise", hint: "Something for a quieter mind. More soon.", glow: "#f0612e" },
+// Copy stays within what Crank's listing states (public/llms.txt).
+const features: {
+  title: string;
+  sub: string;
+  points: string[];
+  src: string;
+  alt: string;
+  anchor?: "top" | "bottom";
+}[] = [
+  {
+    title: "every exercise",
+    sub: "nearly 400 of them,\nwith your full history",
+    points: ["Step-by-step instructions and target muscles", "Every set you ever logged, per lift", "Add your own in seconds"],
+    src: "/screens/exercise-bench.jpg",
+    alt: "Crank exercise page for the barbell bench press",
+  },
+  {
+    title: "every week",
+    sub: "a streak that counts\nweeks, not days",
+    points: ["A heatmap of every session", "Your whole year on one screen", "Gaps show up before they grow"],
+    src: "/screens/activity-year.jpg",
+    alt: "Crank activity heatmap for the year",
+  },
+  {
+    title: "rest timer",
+    sub: "a Live Activity\non your Lock Screen",
+    points: ["Glance at it between sets", "15 seconds more or less, one tap away", "In the Dynamic Island too"],
+    src: "/screens/live-activity-lockscreen.jpg",
+    alt: "Crank rest timer Live Activity on the Lock Screen",
+    anchor: "bottom",
+  },
+  {
+    title: "share cards",
+    sub: "ready for your story\nor the group chat",
+    points: ["A clean card for every session", "Made for Instagram Stories", "Post it to the feed for your friends"],
+    src: "/screens/workout-share-card.jpg",
+    alt: "Crank workout share card",
+  },
+  {
+    title: "Apple Health",
+    sub: "weight in,\nworkouts out",
+    points: ["Weight and steps come in without typing", "Finished workouts land in Health", "Siri Shortcuts, Spotlight and Controls too"],
+    src: "/screens/bodyweight-chart.jpg",
+    alt: "Crank bodyweight chart synced from Apple Health",
+  },
+  {
+    title: "your language",
+    sub: "28 of them,\nand 9 city themes",
+    points: ["Every theme in light and dark", "Sprichst du Deutsch? Crank does", "Strength Wrapped, your year in lifts"],
+    src: "/screens/appearance-themes.jpg",
+    alt: "Crank appearance settings with city themes",
+  },
 ];
 
-const exerciseTiles = [
-  { src: "/exercises/barbell-bench-press.png", pos: "left-[6%] top-[12%]", d: "0s" },
-  { src: "/exercises/barbell-full-squat.png", pos: "left-[18%] top-[58%]", d: "1.2s" },
-  { src: "/exercises/barbell-deadlift.png", pos: "right-[8%] top-[18%]", d: "0.6s" },
-  { src: "/exercises/pull-up.png", pos: "right-[20%] top-[64%]", d: "1.8s" },
-  { src: "/exercises/barbell-bent-over-row.png", pos: "left-[30%] top-[6%]", d: "2.4s" },
-  { src: "/exercises/barbell-curl.png", pos: "right-[30%] top-[4%]", d: "3s" },
+const tiers = ["beginner", "amateur", "semi", "professional", "master", "elite"];
+
+// Crank's nine city themes in light mode: the page colour with the accent on top.
+const themes = [
+  { city: "Basel", page: "#e5e5e5", accent: "#147fcc" },
+  { city: "New York", page: "#dfe1de", accent: "#b88700" },
+  { city: "Istanbul", page: "#fecaca", accent: "#d97706" },
+  { city: "Tehran", page: "#fed7aa", accent: "#0891b2" },
+  { city: "Bogotá", page: "#fef08a", accent: "#6366f1" },
+  { city: "Oslo", page: "#a7f3d0", accent: "#ca8a04" },
+  { city: "Reykjavík", page: "#bfdbfe", accent: "#ea580c" },
+  { city: "Okinawa", page: "#ddd6fe", accent: "#0d9488" },
+  { city: "Socotra", page: "#fbcfe8", accent: "#059669" },
 ];
 
-const insights = [
-  {
-    title: (
-      <>
-        Map
-        <br />
-        every muscle
-      </>
-    ),
-    body: "Front and back, colored by what you trained and what you skipped. Weakest muscle first.",
-    screen: <Shot src="/screens/home-body.jpg" alt="Crank body map colored by trained muscles" sizes="290px" />,
-  },
-  {
-    title: (
-      <>
-        Never miss
-        <br />
-        a week
-      </>
-    ),
-    body: "A heatmap of every session and a streak that counts weeks, not days.",
-    screen: <Shot src="/screens/activity.jpg" alt="Crank activity heatmap for the year" sizes="290px" />,
-  },
-  {
-    title: (
-      <>
-        Line up against
-        <br />
-        your friends
-      </>
-    ),
-    body: "Leaderboards by strength, volume or consistency. Worldwide, or just your crew.",
-    screen: <Shot src="/screens/leaderboard.jpg" alt="Crank leaderboard of top athletes" sizes="290px" />,
-  },
-  {
-    title: (
-      <>
-        Share
-        <br />
-        every workout
-      </>
-    ),
-    body: "Post a session to the feed, follow friends and compare lift for lift.",
-    screen: <Shot src="/screens/profile.jpg" alt="Crank profile with shared workouts" sizes="290px" />,
-  },
+const sets = [
+  { n: 1, w: "80 kg", r: "8", done: true },
+  { n: 2, w: "80 kg", r: "8", done: true },
+  { n: 3, w: "82.5 kg", r: "6", done: false },
+];
+
+const muscles = [
+  { m: "Chest", v: 86, c: "#ff4b2b" },
+  { m: "Back", v: 64, c: "#ff8a3d" },
+  { m: "Legs", v: 38, c: "#ffc15e" },
+];
+
+const teasers: { app: AppId; name: string; hint: string }[] = [
+  { app: "flexmax", name: "FlexMax", hint: "something for flexibility. that's all we'll say for now." },
+  { app: "rise", name: "Rise", hint: "something for a quieter mind. more soon." },
+];
+
+const story: { who: string; lines: string[]; you?: boolean }[] = [
+  { who: "emptea", lines: ["hey 👋 we're a small app studio in Switzerland.", "most health apps want you to keep scrolling."] },
+  { who: "emptea", lines: ["you came to log a set and get back to it.", "so we built Crank. fast, focused, done in minutes."] },
+  { who: "emptea", lines: ["two more apps are on the way. same idea, for flexibility and for your mind."] },
+  { who: "you", lines: ["i'm in 🙌"], you: true },
+];
+
+const included = [
+  "Log every set, for as long as you lift",
+  "88 ready-made plans, or build your own",
+  "Body map, PRs and strength standards",
+  "Rest timer Live Activity, widgets and controls",
+  "Leaderboards, feed and share cards",
+  "Apple Health, Siri Shortcuts and Spotlight",
+  "28 languages and 9 city themes",
 ];
 
 /* ── page ────────────────────────────────────────────────────────── */
@@ -127,236 +144,329 @@ export default function Page() {
   return (
     <div className="bg-paper text-ink">
       <StructuredData />
-      <SmoothScroll />
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:text-paper"
+      >
+        Skip to content
+      </a>
       <Nav />
-      <JoinPill />
 
-      <main>
+      <main id="main">
         <Hero />
 
-        {/* Platforms */}
-        <section className="pt-24">
-          <Container className="flex flex-col items-center gap-6">
-            <h2 className="text-[24px] font-semibold leading-[0.9]">Made for iPhone, works with</h2>
-            <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-[18px] font-semibold text-ink/80">
+        <div className="flex flex-col gap-36 pt-28 md:gap-44 md:pt-36">
+          {/* Platforms */}
+          <Container>
+            <p className="text-center text-sm">Made for iPhone, works with</p>
+            <ul className="mx-auto mt-3 grid max-w-[520px] grid-cols-2 gap-x-6 gap-y-3 text-sm text-dim sm:grid-cols-3 lg:flex lg:max-w-none lg:justify-center lg:gap-x-8">
               {platforms.map(({ icon: Icon, label }) => (
-                <li key={label} className="flex items-center gap-2">
-                  <Icon className="size-5" strokeWidth={2.25} />
+                <li key={label} className="flex items-center justify-center gap-2">
+                  <Icon className="size-4" strokeWidth={1.75} />
                   {label}
                 </li>
               ))}
             </ul>
           </Container>
-        </section>
 
-        {/* Showcase */}
-        <section className="py-40">
-          <Container className="flex flex-col items-center gap-10">
-            <div className="flex gap-8">
-              <Laurel top="Made in" bottom="Switzerland" />
-              <Laurel top="Available in" bottom="28 languages" />
-            </div>
-            <SectionHead
-              title={
-                <>
-                  Everything between you
-                  <br />
-                  and your next PR
-                </>
-              }
-            />
-          </Container>
-          <div className="marquee-wrap edge-fade mt-12 overflow-hidden py-12">
-            <div
-              className="marquee gap-8 pr-8 md:gap-10 md:pr-10"
-              style={{ "--marquee-duration": "70s" } as React.CSSProperties}
-            >
-              {[0, 1].map((copy) =>
-                showcase.map((shot) => (
-                  <div key={`${copy}-${shot.src}`} aria-hidden={copy === 1}>
-                    <Phone className="w-[220px] md:w-[250px]">
-                      <Shot src={shot.src} alt={copy ? "" : shot.alt} sizes="250px" />
-                    </Phone>
-                  </div>
-                )),
-              )}
-            </div>
-          </div>
-        </section>
-
-        {/* Apps */}
-        <section id="apps" className="scroll-mt-24 overflow-hidden pb-40">
-          <Container className="flex flex-col gap-20">
-            <SectionHead
-              title={
-                <>
-                  One studio,
-                  <br />
-                  starting with Crank
-                </>
-              }
-              body="Focused tools for the parts of life that compound. Crank is out now, two more are in the works."
-            />
-
-            <div className="grid gap-4 lg:h-[740px] lg:grid-cols-3">
-              <article
-                className="reveal grid overflow-hidden rounded-3xl bg-mist md:grid-cols-2 lg:col-span-2"
-                style={bottomGlow}
-              >
-                <div className="flex flex-col justify-center gap-4 p-8 md:p-12">
-                  <p className="text-[16px] font-medium text-green-600">Live on the App Store</p>
-                  <h3 className="text-heading">Crank</h3>
-                  <p className="text-lead text-ink/60">
-                    A workout tracker built for speed. Log sets, map muscles and see exactly where you stand.
-                  </p>
-                  <PillButton href={APP_STORE} className="mt-2 self-start">
-                    Get
-                  </PillButton>
+          {/* Proof */}
+          <Container className="reveal">
+            <SectionTitle title="don't take our word" sub="take the numbers" />
+            <div className="mt-14 grid gap-4 md:mt-16 md:grid-cols-3">
+              <Panel className="flex min-h-[300px] flex-col p-8 md:row-span-2 md:min-h-[536px]">
+                <div className="flex gap-3">
+                  <AppIcon app="crank" className="w-11" />
+                  <AppIcon app="flexmax" className="w-11 blur-[2px] grayscale-[0.4]" />
+                  <AppIcon app="rise" className="w-11 blur-[2px] grayscale-[0.4]" />
                 </div>
-                <div className="flex h-[560px] justify-center md:h-auto">
-                  <Phone className="w-[280px] translate-y-12">
-                    <Shot src="/screens/workout-hub.jpg" alt="Crank workout tab with today's plan" sizes="280px" />
+                <h3 className="mt-auto text-[24px] leading-[1.08] tracking-[-0.045em] lg:text-[32px]">
+                  1 app out{" "}
+                  <span className="block text-dim">2 on the way</span>
+                </h3>
+              </Panel>
+
+              <Panel className="flex min-h-[260px] flex-col gap-10 p-8 md:col-span-2">
+                <MockCard className="flex items-center gap-2 self-start rounded-full px-4 py-2 text-[13px]">
+                  <Languages className="size-4 text-dim" strokeWidth={1.75} />
+                  Sprichst du Deutsch?
+                </MockCard>
+                <Stat value="28" label="languages" />
+              </Panel>
+
+              <Panel className="flex min-h-[260px] flex-col gap-10 p-8">
+                <ul className="flex flex-wrap gap-1.5" aria-hidden="true">
+                  {themes.map((t) => (
+                    <li
+                      key={t.city}
+                      title={t.city}
+                      className="flex size-5 items-center justify-center rounded-full ring-1 ring-inset ring-black/5"
+                      style={{ background: t.page }}
+                    >
+                      <span className="size-2 rounded-full" style={{ background: t.accent }} />
+                    </li>
+                  ))}
+                </ul>
+                <Stat value="9" label="city themes, light and dark" />
+              </Panel>
+
+              <Panel className="flex min-h-[260px] flex-col gap-10 p-8">
+                <div className="flex h-12 items-end gap-1.5" aria-hidden="true">
+                  {tiers.map((t, i) => (
+                    <span
+                      key={t}
+                      className="w-3 rounded-full bg-brand"
+                      style={{ height: `${30 + i * 14}%`, opacity: 0.3 + i * 0.14 }}
+                    />
+                  ))}
+                </div>
+                <Stat value="6" label="strength tiers, beginner to elite" />
+              </Panel>
+            </div>
+          </Container>
+
+          {/* Showcase */}
+          <Container className="reveal">
+            <SectionTitle title="everything between you" sub="and your next PR" />
+            <Panel className="marquee-wrap mt-14 md:mt-16">
+              <div className="edge-fade overflow-hidden py-12">
+                <div
+                  className="marquee gap-6 pr-6 md:gap-8 md:pr-8"
+                  style={{ "--marquee-duration": "80s" } as React.CSSProperties}
+                >
+                  {[0, 1].map((copy) =>
+                    showcase.map((shot) => (
+                      <div key={`${copy}-${shot.src}`} aria-hidden={copy === 1 || undefined}>
+                        <Phone className="w-[190px] md:w-[220px]">
+                          <Shot src={shot.src} alt={copy ? "" : shot.alt} sizes="220px" />
+                        </Phone>
+                      </div>
+                    )),
+                  )}
+                </div>
+              </div>
+            </Panel>
+          </Container>
+
+          {/* Features */}
+          <Container id="features" className="flex scroll-mt-28 flex-col gap-28 md:gap-36">
+            {features.map((f, i) => (
+              <FeatureRow key={f.title} {...f} flip={i % 2 === 1} />
+            ))}
+          </Container>
+
+          {/* Setup */}
+          <Container id="setup" className="reveal scroll-mt-28">
+            <SectionTitle title="quick start" sub="training in minutes" />
+            <div className="mx-auto mt-14 flex max-w-[760px] flex-col gap-4 md:mt-16">
+              <SetupStep n={1} title="download Crank" body="on the App Store">
+                <MockCard className="flex w-full max-w-[260px] items-center gap-3">
+                  <AppIcon app="crank" className="w-12" />
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm">Crank</p>
+                    <p className="truncate text-xs text-dim">Gym & Workout Tracker</p>
+                  </div>
+                  <span className="rounded-full bg-panel px-4 py-1.5 text-xs text-[#0071e3]">Get</span>
+                </MockCard>
+              </SetupStep>
+
+              <SetupStep n={2} title="log your first set" body="88 ready-made plans, 3 to 6 days a week">
+                <MockCard className="w-full max-w-[260px]">
+                  <p className="mb-2 text-sm">Bench Press</p>
+                  <ul className="flex flex-col gap-1.5 text-xs tabular-nums">
+                    {sets.map((s) => (
+                      <li key={s.n} className="flex items-center gap-3 rounded-xl bg-panel px-3 py-2">
+                        <span className="w-3 text-dim">{s.n}</span>
+                        <span className="flex-1">
+                          {s.w} <span className="text-dim">×</span> {s.r}
+                        </span>
+                        <span
+                          className={cn(
+                            "flex size-4 items-center justify-center rounded-full",
+                            s.done ? "bg-brand text-white" : "ring-1 ring-inset ring-faint",
+                          )}
+                        >
+                          {s.done && <Check className="size-2.5" strokeWidth={3.5} />}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </MockCard>
+              </SetupStep>
+
+              <SetupStep n={3} title="watch the map fill in" body="every muscle you trained lights up">
+                <MockCard className="w-full max-w-[260px]">
+                  <p className="mb-3 text-xs text-dim">Volume this week</p>
+                  <ul className="flex flex-col gap-2.5 text-xs">
+                    {muscles.map((m) => (
+                      <li key={m.m} className="flex items-center gap-3">
+                        <span className="w-10">{m.m}</span>
+                        <span className="h-1.5 flex-1 overflow-hidden rounded-full bg-panel">
+                          <span className="block h-full rounded-full" style={{ width: `${m.v}%`, background: m.c }} />
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </MockCard>
+              </SetupStep>
+            </div>
+          </Container>
+
+          {/* Apps */}
+          <Container id="apps" className="reveal scroll-mt-28">
+            <SectionTitle title="one studio" sub="starting with Crank" />
+            <div className="mt-14 grid gap-4 md:mt-16 lg:grid-cols-3">
+              <Panel className="grid md:grid-cols-2 lg:col-span-2">
+                <div className="flex flex-col items-start justify-center gap-5 p-8 md:p-12">
+                  <AppIcon app="crank" className="w-14" />
+                  <h3 className="text-title">
+                    Crank{" "}
+                    <span className="block text-dim">out now</span>
+                  </h3>
+                  <p className="max-w-[320px] text-sm leading-relaxed text-dim">
+                    A workout tracker built for strength. Log sets, map muscles and see exactly where you stand.
+                  </p>
+                  <Pill href={APP_STORE} arrow>
+                    Get Crank
+                  </Pill>
+                </div>
+                <div className="flex h-[380px] justify-center overflow-hidden pt-10 md:h-[480px]">
+                  <Phone className="w-[250px]">
+                    <Shot src="/screens/plan-hub.jpg" alt="Crank workout tab with today's plan" sizes="250px" />
                   </Phone>
                 </div>
-              </article>
+              </Panel>
 
-              <div className="flex flex-col gap-4">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
                 {teasers.map((t) => (
-                  <article
-                    key={t.app}
-                    className="reveal relative flex min-h-[320px] flex-1 flex-col justify-between overflow-hidden rounded-3xl bg-mist p-8 md:p-10"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="absolute -right-20 -top-20 size-72 rounded-full opacity-20 blur-3xl"
-                      style={{ background: t.glow }}
-                    />
-                    <AppIcon app={t.app} className="relative w-16 blur-[3px] grayscale-[0.4]" />
-                    <div className="relative flex flex-col gap-2">
-                      <p className="text-[16px] font-medium text-amber-600">In development</p>
-                      <h3 className="text-title">{t.name}</h3>
-                      <p className="text-[18px] leading-snug text-ink/60">{t.hint}</p>
+                  <Panel key={t.app} className="flex flex-col justify-between gap-10 p-8">
+                    <AppIcon app={t.app} className="w-14 blur-[3px] grayscale-[0.4]" />
+                    <div>
+                      <h3 className="text-title">
+                        {t.name}{" "}
+                        <span className="block text-dim">in development</span>
+                      </h3>
+                      <p className="mt-3 text-sm leading-relaxed text-dim">{t.hint}</p>
+                      <a
+                        href={WAITLIST}
+                        className="mt-3 inline-flex min-h-10 items-center text-sm underline-offset-4 hover:underline"
+                      >
+                        join the waitlist ↗
+                      </a>
                     </div>
-                  </article>
+                  </Panel>
                 ))}
               </div>
             </div>
-
-            <article className="reveal grid overflow-hidden rounded-3xl bg-mist lg:h-[658px] lg:grid-cols-2" style={bottomGlow}>
-              <div className="flex flex-col justify-center gap-4 p-8 md:p-16">
-                <h3 className="text-heading">
-                  Every rep,
-                  <br />
-                  counted
-                </h3>
-                <p className="text-lead max-w-[420px] text-ink/60">
-                  Log a set and Crank does the rest: volume by muscle, PRs, standards and a share card for the ones that matter.
-                </p>
-              </div>
-              <div className="h-[600px] lg:h-auto">
-                <TrainingCollage />
-              </div>
-            </article>
-
-            <article className="reveal grid overflow-hidden rounded-3xl bg-mist lg:h-[658px] lg:grid-cols-2" style={bottomGlow}>
-              <div className="relative order-2 flex h-[560px] justify-center lg:order-1 lg:h-auto">
-                <Phone className="w-[290px] translate-y-16">
-                  <Shot src="/screens/exercise-squat.jpg" alt="Crank exercise page for the barbell squat" sizes="290px" />
-                </Phone>
-                {exerciseTiles.map((t, i) => (
-                  <span
-                    key={i}
-                    className={cn(
-                      "float absolute hidden size-16 items-center sm:flex justify-center rounded-[20px] bg-white shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)]",
-                      t.pos,
-                    )}
-                    style={{ animationDelay: t.d }}
-                  >
-                    <Image src={t.src} alt="" width={120} height={120} className="size-11 object-contain" />
-                  </span>
-                ))}
-              </div>
-              <div className="order-1 flex flex-col justify-center gap-4 p-8 md:p-16 lg:order-2">
-                <h3 className="text-heading">
-                  Hundreds
-                  <br />
-                  of exercises
-                </h3>
-                <p className="text-lead max-w-[420px] text-ink/60">
-                  Every exercise with its graphic, its targets and your full history. Add your own in seconds.
-                </p>
-              </div>
-            </article>
           </Container>
-        </section>
 
-        {/* Crank, dark */}
-        <div className="relative">
-          <section id="crank" className="scroll-mt-24 bg-night pt-40 text-white lg:pt-32">
-            <Container className="flex flex-col gap-16 lg:gap-0">
-              <SectionHead
-                title={
-                  <>
-                    <span className="text-white/60">Know your body</span>
-                    <br />
-                    with Crank
-                  </>
-                }
-                body="A tracker that reads your training back to you, four ways."
-              />
-              <StackedCards>
-                {insights.map((card, i) => (
-                  <article
-                    key={i}
-                    className="grid h-full overflow-hidden rounded-3xl bg-mist text-ink shadow-[0_-24px_60px_-24px_rgba(0,0,0,0.9)] ring-1 ring-inset ring-white/10 lg:grid-cols-2"
-                    style={cornerGlow}
-                  >
-                    <div className="flex flex-col justify-center gap-4 p-8 md:p-16">
-                      <h3 className="text-heading">{card.title}</h3>
-                      <p className="text-lead max-w-[420px] text-ink/60">{card.body}</p>
-                    </div>
-                    <div className="flex h-[520px] justify-center overflow-hidden lg:h-auto">
-                      <Phone className="w-[290px] translate-y-14">{card.screen}</Phone>
-                    </div>
-                  </article>
-                ))}
-              </StackedCards>
-            </Container>
-            <div className="h-24 lg:h-0" />
-          </section>
-          {/* shutter: dark bands thinning into the next section */}
-          <div className="flex flex-col gap-[6px] bg-paper">
-            {[20, 14, 9, 5, 2].map((h) => (
-              <span key={h} className="shutter-bar block origin-top bg-night" style={{ height: h }} />
-            ))}
-          </div>
+          {/* Story */}
+          <Container className="reveal">
+            <SectionTitle title="by lifters" sub="for lifters" />
+            <div className="mx-auto mt-14 flex max-w-[640px] flex-col gap-6 md:mt-16">
+              {story.map((m, i) => (
+                <div key={i} className={cn("flex items-end gap-3", m.you && "flex-row-reverse")}>
+                  {!m.you && (
+                    <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-panel text-brand">
+                      <Mark className="size-4" />
+                    </span>
+                  )}
+                  <div className={cn("flex min-w-0 flex-col gap-1.5", m.you ? "items-end" : "items-start")}>
+                    <p className="px-1 text-xs text-dim">{m.who}</p>
+                    {m.lines.map((line) => (
+                      <p
+                        key={line}
+                        className={cn(
+                          "max-w-[480px] rounded-[22px] px-4 py-2.5 text-sm leading-relaxed",
+                          m.you ? "bg-[#007aff] text-white" : "bg-panel text-ink",
+                        )}
+                      >
+                        {line}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Container>
+
+          {/* Pricing */}
+          <Container id="pricing" className="reveal scroll-mt-28">
+            <SectionTitle title="no bulls**t pricing" sub="one plan, everything in it" />
+            <div className="mt-14 grid gap-4 md:mt-16 lg:grid-cols-2">
+              <Panel className="flex flex-col justify-between gap-12 p-8 md:p-12">
+                <div>
+                  <p className="text-stat">
+                    Ultra <span className="text-sm tracking-normal text-dim">the only plan</span>
+                  </p>
+                  <p className="mt-6 max-w-[360px] text-sm leading-relaxed text-dim">
+                    Eligible new subscribers start with a free trial. After that it&apos;s a yearly plan, or one payment
+                    for lifetime. <span className="text-ink">Nothing is locked behind a higher tier.</span>
+                  </p>
+                </div>
+                <Pill href={APP_STORE} arrow className="self-start">
+                  Get Crank
+                </Pill>
+              </Panel>
+              <Panel className="p-8 md:p-12">
+                <h3 className="text-[22px] leading-tight tracking-[-0.03em]">everything in Ultra, included</h3>
+                <CheckList items={included} className="mt-6" />
+                <p className="mt-8 text-sm text-dim">
+                  Something missing?{" "}
+                  <a href={CONTACT} className="text-ink underline-offset-4 hover:underline">
+                    tell us ↗
+                  </a>
+                </p>
+              </Panel>
+            </div>
+          </Container>
+
+          {/* FAQ */}
+          <Container id="faq" className="reveal scroll-mt-28">
+            <div className="mx-auto max-w-[760px]">
+              <h2 className="text-heading">your questions, answered</h2>
+              <div className="mt-10">
+                <Faq />
+              </div>
+            </div>
+          </Container>
+
+          {/* CTA */}
+          <Container className="reveal">
+            <div className="relative mx-auto flex aspect-[4/5] max-w-[440px] flex-col justify-end overflow-hidden rounded-panel bg-night p-8 text-white sm:p-10">
+              <Image src="/photos/crank-05.jpg" alt="" fill sizes="440px" className="object-cover object-bottom" />
+              <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(0,0,0,0.75),rgba(0,0,0,0.3)_40%,transparent_65%)]" />
+              <div className="relative flex flex-col items-start gap-6">
+                <h2 className="text-balance text-[clamp(30px,3.6vw,40px)] leading-[1.1] tracking-[-0.04em]">
+                  start today. thank yourself later.
+                </h2>
+                <Pill href={APP_STORE} arrow>
+                  Get Crank
+                </Pill>
+              </div>
+            </div>
+          </Container>
         </div>
-
-        {/* Extras */}
-        <section className="py-40">
-          <Container>
-            <Extras />
-          </Container>
-        </section>
-
-        {/* CTA */}
-        <section className="overflow-hidden">
-          <Container className="flex flex-col items-center gap-6">
-            <SectionHead
-              title="Start today. Thank yourself later."
-              body="Crank is free on the App Store. More is on the way."
-            />
-            <PillButton href={APP_STORE}>Get</PillButton>
-          </Container>
-          <div className="relative mx-auto mt-16 flex h-[420px] max-w-[1100px] items-start justify-center [mask-image:linear-gradient(#000_70%,transparent)]">
-            <Phone className="w-[260px]">
-              <Shot src="/screens/workout-hub.jpg" alt="Crank workout tab" sizes="260px" />
-            </Phone>
-          </div>
-        </section>
       </main>
 
-      <Footer />
+      <div className="mt-24 md:mt-32">
+        <Footer />
+      </div>
     </div>
+  );
+}
+
+function SetupStep({ n, title, body, children }: { n: number; title: string; body: string; children: React.ReactNode }) {
+  return (
+    <Panel className="grid items-center gap-8 p-6 sm:grid-cols-2 sm:gap-10 sm:p-10">
+      <div className="flex justify-center">{children}</div>
+      <div>
+        <p className="text-sm text-dim">
+          <span className="sr-only">Step </span>
+          {n}
+        </p>
+        <h3 className="mt-3 text-[24px] leading-tight tracking-[-0.03em]">{title}</h3>
+        <p className="mt-1 text-sm text-dim">{body}</p>
+      </div>
+    </Panel>
   );
 }

@@ -4,16 +4,35 @@
     {
       "name": "next-dev",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["next", "dev"],
+      "runtimeArgs": [
+        "next",
+        "dev"
+      ],
       "port": 3000,
       "autoPort": true
     },
     {
       "name": "maruthan-com",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["--prefix", "/Users/maruthan/Documents/GitHub/maruthan-com", "run", "dev"],
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/maruthan/Documents/GitHub/maruthan-com",
+        "run",
+        "dev"
+      ],
       "port": 3001,
       "autoPort": true
+    },
+    {
+      "name": "next-start",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "next",
+        "start",
+        "-p",
+        "3100"
+      ],
+      "port": 3100
     }
   ]
 }

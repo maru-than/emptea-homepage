@@ -9,8 +9,8 @@ export function LegalHeader({
 }) {
   return (
     <header className="pb-10">
-      <p className="text-sm font-medium text-blue-700">Legal</p>
-      <h1 className="mt-2 text-4xl font-semibold">{title}</h1>
+      <p className="text-sm text-dim">Legal</p>
+      <h1 className="mt-2 text-[36px] leading-[1.1] tracking-[-0.04em]">{title}</h1>
       <p className="mt-4 text-sm text-muted-foreground">
         Last updated: {updated}
       </p>
@@ -35,7 +35,7 @@ export function LegalSection({
 }) {
   return (
     <section className="space-y-3">
-      <h2 className="text-xl font-semibold">{title}</h2>
+      <h2 className="text-[20px] tracking-[-0.02em]">{title}</h2>
       {children}
     </section>
   );

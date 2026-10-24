@@ -1,32 +1,42 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { ImageResponse } from "next/og";
+import { MARK_PATH } from "@/components/home/brand";
 
-export const runtime = "edge";
-export const alt = "emptea — The toolkit for a better you. Crank, the workout tracker for iPhone.";
+export const alt = "emptea — Healthmaxxing without distractions. Crank, the workout tracker for iPhone.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OG() {
+  // Static TTF: Satori can't read the variable woff2 the site uses.
+  const geist = await readFile(path.join(process.cwd(), "app/fonts/Geist-Regular.ttf"));
+
   return new ImageResponse(
     (
       <div
         style={{
           width: "100%",
           height: "100%",
-          background: "#0b0b0c",
+          background: "#ffffff",
           display: "flex",
           flexDirection: "column",
           padding: "80px",
-          fontFamily: "system-ui, -apple-system, sans-serif",
+          fontFamily: "Geist",
         }}
       >
         <div
           style={{
-            fontSize: 28,
-            fontWeight: 600,
-            color: "#f2f2f3",
-            letterSpacing: "-0.03em",
+            fontSize: 30,
+            color: "#242424",
+            letterSpacing: "-0.05em",
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
           }}
         >
+          <svg width="30" height="30" viewBox="12 12 276 276">
+            <path fill="#ff4b2b" d={MARK_PATH} />
+          </svg>
           emptea
         </div>
 
@@ -35,8 +45,7 @@ export default async function OG() {
         <div
           style={{
             fontSize: 22,
-            fontWeight: 500,
-            color: "#52aeff",
+            color: "#707070",
             marginBottom: 32,
           }}
         >
@@ -45,17 +54,17 @@ export default async function OG() {
 
         <div
           style={{
-            fontSize: 80,
-            fontWeight: 600,
-            color: "#f2f2f3",
-            lineHeight: 1.05,
-            letterSpacing: "-0.03em",
+            fontSize: 84,
+            fontWeight: 400,
+            color: "#242424",
+            lineHeight: 1.08,
+            letterSpacing: "-0.05em",
             display: "flex",
             flexDirection: "column",
           }}
         >
-          <span>The toolkit</span>
-          <span>for a better you.</span>
+          <span>healthmaxxing</span>
+          <span style={{ color: "#949494" }}>without distractions</span>
         </div>
 
         <div
@@ -63,17 +72,24 @@ export default async function OG() {
             marginTop: 56,
             display: "flex",
             gap: 28,
-            fontSize: 28,
-            fontWeight: 600,
             alignItems: "center",
           }}
         >
-          <span style={{ color: "#f2f2f3" }}>Crank</span>
-          <span style={{ color: "#4d4d4d", fontWeight: 400 }}>·</span>
-          <span style={{ color: "#8f8f8f", fontWeight: 500 }}>Free on the App Store</span>
+          <span
+            style={{
+              background: "#ff4b2b",
+              color: "#ffffff",
+              borderRadius: 999,
+              padding: "14px 30px",
+              fontSize: 24,
+            }}
+          >
+            Get Crank
+          </span>
+          <span style={{ color: "#707070", fontSize: 24 }}>Now on the App Store</span>
         </div>
       </div>
     ),
-    { ...size }
+    { ...size, fonts: [{ name: "Geist", data: geist, weight: 400, style: "normal" }] },
   );
 }

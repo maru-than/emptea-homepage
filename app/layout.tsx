@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { GeistMono } from "geist/font/mono";
+import { Instrument_Serif } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
@@ -11,9 +12,17 @@ const geist = localFont({
   display: "swap",
 });
 
-const title = "emptea — The toolkit for a better you · Crank workout tracker";
+const instrumentSerif = Instrument_Serif({
+  weight: "400",
+  style: "italic",
+  subsets: ["latin"],
+  variable: "--font-instrument-serif",
+  display: "swap",
+});
+
+const title = "emptea — Crank, the iPhone workout tracker";
 const description =
-  "Crank is a fast iPhone workout tracker. Log sets in seconds, map every muscle, track PRs and streaks, and compare with friends. Free, made in Switzerland.";
+  "Crank is a fast iPhone workout tracker. Log sets in seconds, map every muscle, track PRs and streaks, and compare with friends. Made in Switzerland.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://emptea.xyz"),
@@ -79,8 +88,8 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  colorScheme: "dark",
-  themeColor: "#0b0b0c",
+  colorScheme: "light",
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({
@@ -89,7 +98,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark ${geist.variable} ${GeistMono.variable}`}
+      data-scroll-behavior="smooth"
+      style={{ scrollBehavior: "smooth" }}
+      className={`${geist.variable} ${GeistMono.variable} ${instrumentSerif.variable}`}
     >
       <body className="antialiased">
         {children}

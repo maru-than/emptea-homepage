@@ -7,29 +7,29 @@ export const WAITLIST = "mailto:emptea.studios@gmail.com?subject=FlexMax%20and%2
 export const CONTACT = "mailto:emptea.studios@gmail.com";
 
 export const apps = {
-  crank: { name: "Crank", icon: null, mark: "/crank-mark.svg", from: "#ffffff", to: "#f4f4f5" },
-  flexmax: { name: "FlexMax", icon: PersonStanding, mark: null, from: "#5fdc8a", to: "#1f9e52" },
-  rise: { name: "Rise", icon: Sunrise, mark: null, from: "#ffb27a", to: "#f0612e" },
+  // Crank's real App Store icon (Classic): white Atlas figure on the #004A68 gradient.
+  crank: { name: "Crank", icon: null, image: "/crank-icon.png", from: "#1f5a7a", to: "#004a68" },
+  flexmax: { name: "FlexMax", icon: PersonStanding, image: null, from: "#5fdc8a", to: "#1f9e52" },
+  rise: { name: "Rise", icon: Sunrise, image: null, from: "#ffb27a", to: "#f0612e" },
 };
 
 export type AppId = keyof typeof apps;
 
 /** App icon tile, sized by className width. */
 export function AppIcon({ app, className }: { app: AppId; className?: string }) {
-  const { icon: Icon, mark, from, to, name } = apps[app];
+  const { icon: Icon, image, from, to, name } = apps[app];
   return (
     <span
       role="img"
       aria-label={name}
       className={cn(
-        "relative flex aspect-square w-20 items-center justify-center overflow-hidden rounded-[22.5%] shadow-[0_24px_48px_-20px_rgba(31,32,37,0.5)]",
-        mark && "ring-1 ring-inset ring-night/10",
+        "relative flex aspect-square w-20 items-center justify-center overflow-hidden rounded-[22.5%] shadow-[0_6px_18px_-8px_rgba(0,0,0,0.24)]",
         className,
       )}
       style={{ background: `linear-gradient(160deg, ${from}, ${to})` }}
     >
-      {mark ? (
-        <Image src={mark} alt="" width={392} height={741} className="relative h-[58%] w-auto" />
+      {image ? (
+        <Image src={image} alt="" fill sizes="96px" className="object-cover" />
       ) : (
         <>
           <span className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent" />
@@ -52,25 +52,12 @@ export function Mark({ className }: { className?: string }) {
   );
 }
 
+/** Wordmark: accent teacup beside the name, set tight like a logotype. */
 export function Wordmark({ className }: { className?: string }) {
   return (
-    <span className={cn("flex items-center gap-2 text-[20px] font-semibold", className)}>
-      <Mark />
+    <span className={cn("inline-flex items-baseline gap-[0.22em] text-[22px] leading-none tracking-[-0.05em]", className)}>
+      <Mark className="size-[0.95em] translate-y-[0.08em] text-brand" />
       emptea
     </span>
-  );
-}
-
-/** Award-style label between two laurel branches. */
-export function Laurel({ top, bottom }: { top: string; bottom: string }) {
-  return (
-    <div className="flex items-center gap-2">
-      <Image src="/laurel-leading.svg" alt="" width={11} height={22} unoptimized className="h-11 w-auto opacity-70" />
-      <div className="text-center text-[13px] font-medium leading-tight text-ink/70">
-        <p>{top}</p>
-        <p>{bottom}</p>
-      </div>
-      <Image src="/laurel-trailing.svg" alt="" width={11} height={22} unoptimized className="h-11 w-auto opacity-70" />
-    </div>
   );
 }

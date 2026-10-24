@@ -111,60 +111,72 @@
 
   --default-border-width: 1px;
 
-  --color-ink: #f2f2f3;
-  --color-night: #000000;
-  --color-mist: #1c1c1e;
-  --color-raised: #2c2c2e;
-  --color-paper: #0b0b0c;
+  /* landing palette */
+  --color-paper: #ffffff;
+  --color-ink: #242424;
+  --color-dim: #707070; /* 4.9:1 on paper, 4.6:1 on panel */
+  --color-faint: #949494; /* 3.0:1 on paper: large text only */
+  --color-panel: #f7f7f7;
+  --color-panel-hover: #ececef;
+  --color-hairline: #e7e7ea;
+  --color-brand: #ff4b2b;
+  --color-brand-hover: #e93e20;
+  --color-night: #111215;
+
+  --radius-panel: clamp(28px, 3vw, 48px);
+  --radius-choice: 24px;
+
+  --ease-landing: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 :root {
   --radius: 0.625rem;
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #242424;
   --card: #ffffff;
-  --card-foreground: #171717;
+  --card-foreground: #242424;
   --popover: #ffffff;
-  --popover-foreground: #171717;
-  --primary: #171717;
+  --popover-foreground: #242424;
+  --primary: #242424;
   --primary-foreground: #ffffff;
-  --secondary: #f2f2f2;
-  --secondary-foreground: #171717;
-  --muted: #f2f2f2;
-  --muted-foreground: #8f8f8f;
-  --accent: #f2f2f2;
-  --accent-foreground: #171717;
+  --secondary: #f7f7f7;
+  --secondary-foreground: #242424;
+  --muted: #f7f7f7;
+  --muted-foreground: #707070;
+  --accent: #f7f7f7;
+  --accent-foreground: #242424;
   --destructive: #e5484d;
-  --border: #ebebeb;
-  --input: #e6e6e6;
-  --ring: #a8a8a8;
+  --border: #e7e7ea;
+  --input: #e7e7ea;
+  --ring: #242424;
 }
 
 .dark {
   color-scheme: dark;
-  --background: #0b0b0c;
-  --foreground: #f2f2f2;
+  --background: #111215;
+  --foreground: #f1f1f4;
   --card: #1c1c1e;
-  --card-foreground: #f2f2f2;
+  --card-foreground: #f1f1f4;
   --popover: #1c1c1e;
-  --popover-foreground: #f2f2f2;
-  --primary: #f2f2f2;
+  --popover-foreground: #f1f1f4;
+  --primary: #f1f1f4;
   --primary-foreground: #171717;
-  --secondary: #2c2c2e;
-  --secondary-foreground: #f2f2f2;
-  --muted: #2c2c2e;
-  --muted-foreground: #a8a8a8;
-  --accent: #2c2c2e;
-  --accent-foreground: #f2f2f2;
+  --secondary: #2a2a2e;
+  --secondary-foreground: #f1f1f4;
+  --muted: #2a2a2e;
+  --muted-foreground: #a3a5af;
+  --accent: #2a2a2e;
+  --accent-foreground: #f1f1f4;
   --destructive: #f87275;
-  --border: #2c2c2e;
-  --input: #2c2c2e;
+  --border: #303138;
+  --input: #303138;
   --ring: #8f8f8f;
 }
 
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-instrument-serif), Georgia, serif;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -191,147 +203,63 @@
   --color-ring: var(--ring);
 }
 
-/* Locomotive Scroll v5 (Lenis) */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-
-.lenis:not(.lenis-autoToggle).lenis-stopped {
-  overflow: clip;
-}
-
-.lenis [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-smooth iframe {
-  pointer-events: none;
-}
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
-    letter-spacing: -0.03em;
+    font-size: 16px;
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+    font-weight: 400;
+    text-rendering: optimizeLegibility;
   }
 }
 
-
-/* ── Home ────────────────────────────────────────────────────────── */
+/* ── Home type scale (reception.sh: regular weight, tight tracking, grey second line) ── */
 
 @utility text-display {
-  font-size: clamp(44px, 6.4vw, 80px);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  font-weight: 600;
+  font-size: clamp(40px, 5.2vw, 60px);
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+  font-weight: 400;
 }
 
 @utility text-heading {
-  font-size: clamp(38px, 5vw, 64px);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  font-weight: 600;
+  font-size: clamp(34px, 4.4vw, 50px);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  font-weight: 400;
 }
 
 @utility text-title {
-  font-size: clamp(30px, 3vw, 40px);
-  line-height: 1;
+  font-size: clamp(22px, 2.4vw, 28px);
+  line-height: 1.15;
   letter-spacing: -0.03em;
-  font-weight: 600;
+  font-weight: 400;
 }
 
-@utility text-lead {
-  font-size: clamp(18px, 1.8vw, 24px);
-  line-height: 1.3;
+@utility text-stat {
+  font-size: clamp(44px, 5.6vw, 76px);
+  line-height: 1;
+  letter-spacing: -0.055em;
+  font-weight: 400;
 }
 
 @layer components {
-  /* warp streaks behind the hero devices */
-  .tunnel {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-    border-radius: inherit;
-  }
-
-  .tunnel::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 70%;
-    width: 140%;
-    aspect-ratio: 1;
-    transform: translate(-50%, -50%) scaleY(0.3);
-    background:
-      repeating-conic-gradient(from 0deg, rgba(255, 255, 255, 0.25) 0deg 0.5deg, rgba(255, 255, 255, 0) 0.5deg 2.4deg),
-      conic-gradient(
-        from 90deg,
-        #ff9ac1,
-        #ffc58a,
-        #fff1a1,
-        #a8f0c0,
-        #8fe3ff,
-        #a9a6ff,
-        #ff9ac1,
-        #ffc58a,
-        #fff1a1,
-        #a8f0c0,
-        #8fe3ff,
-        #a9a6ff,
-        #ff9ac1
-      );
-    mask-image: radial-gradient(closest-side, transparent 20%, #000 38%, #000 52%, transparent 78%);
-    filter: blur(6px) saturate(0.7);
-    opacity: 0.16;
-  }
-
-  .tunnel::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 70%;
-    width: 46%;
-    aspect-ratio: 2.2;
-    transform: translate(-50%, -50%);
-    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.06) 30%, rgba(255, 255, 255, 0) 70%);
-    filter: blur(18px);
-  }
-
-  /* status cards streaming out of the hero along the tunnel */
-  .fly {
-    position: absolute;
-    left: 50%;
-    top: 58%;
-    opacity: 0;
-    animation: fly var(--fly-duration, 9s) cubic-bezier(0.35, 0, 0.65, 1) infinite;
-    animation-delay: var(--fly-delay, 0s);
-  }
-
-  .cloud {
-    position: absolute;
-    border-radius: 9999px;
-    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 68%);
-    filter: blur(6px);
-    pointer-events: none;
-  }
-
   .marquee {
     display: flex;
     width: max-content;
     animation: marquee var(--marquee-duration, 60s) linear infinite;
   }
 
-  /* fade marquee content in and out at the left/right edges */
-  .edge-fade {
-    mask-image: linear-gradient(90deg, transparent 0%, #000 20%, #000 80%, transparent 100%);
+  .marquee-wrap:hover .marquee {
+    animation-play-state: paused;
   }
 
-  .fade-y {
-    mask-image: linear-gradient(180deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  .edge-fade {
+    mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
   }
 
   .no-scrollbar {
@@ -342,48 +270,32 @@ html.lenis body {
     display: none;
   }
 
-  .marquee-wrap:hover .marquee {
-    animation-play-state: paused;
+  /* <details> arrow turns into a cross when open */
+  .faq summary {
+    list-style: none;
   }
 
-  .float {
-    animation: float 6s ease-in-out infinite;
+  .faq summary::-webkit-details-marker {
+    display: none;
   }
 
-  .progress-ring {
-    stroke-dasharray: 100;
-    stroke-dashoffset: 100;
-    animation: progress-ring var(--progress-duration, 6s) linear forwards;
+  .faq[open] .faq-plus {
+    transform: rotate(45deg);
   }
 }
 
 @supports (animation-timeline: view()) {
   .reveal {
-    animation: reveal linear both;
+    animation: reveal 1s var(--ease-landing) both;
     animation-timeline: view();
-    animation-range: entry 0% entry 35%;
-  }
-
-  .shutter-bar {
-    animation: shutter linear both;
-    animation-timeline: view();
-    animation-range: cover 0% cover 60%;
+    animation-range: entry 0% entry 30%;
   }
 }
 
 @keyframes reveal {
   from {
     opacity: 0;
-    transform: translateY(32px);
-  }
-}
-
-@keyframes shutter {
-  from {
-    transform: scaleY(1);
-  }
-  to {
-    transform: scaleY(0);
+    transform: translateY(24px);
   }
 }
 
@@ -393,41 +305,12 @@ html.lenis body {
   }
 }
 
-@keyframes fly {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.5);
-  }
-  15% {
-    opacity: 1;
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: translate(calc(-50% + var(--fly-x)), calc(-50% + var(--fly-y))) scale(1.05);
-  }
-}
-
-@keyframes float {
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes progress-ring {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
   .marquee,
-  .float,
-  .fly,
-  .reveal,
-  .shutter-bar {
+  .reveal {
     animation: none;
   }
 }

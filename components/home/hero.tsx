@@ -1,112 +1,171 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { APP_STORE, AppIcon } from "@/components/home/brand";
-import { PillButton } from "@/components/home/chrome";
+import { useEffect, useRef, useState } from "react";
+import { APP_STORE } from "@/components/home/brand";
+import { Pill } from "@/components/home/chrome";
 import { Phone, Shot } from "@/components/home/phone";
 import { cn } from "@/lib/utils";
 
-const INTERVAL = 4500;
+const INTERVAL = 6000;
 
-const slides = [
-  { src: "/screens/home-charts.jpg", alt: "Crank charts with the training heatmap", stat: "15 wk", label: "training streak" },
-  { src: "/screens/home-body.jpg", alt: "Crank body map colored by trained muscles", stat: "13", label: "muscles levelled up" },
-  { src: "/screens/workout-hub.jpg", alt: "Crank workout tab with today's plan", stat: "4,642 kg", label: "lifted today" },
-];
-
-/** Status cards that stream out along the tunnel. x/y is where each one ends up. */
-const flyers = [
-  { title: "New PR", body: "Bench Press · 95 kg", x: "38vw", y: "-60px", delay: "0s" },
-  { title: "Rest", body: "1:51 left · set 3 of 4", x: "-40vw", y: "-90px", delay: "1.5s" },
-  { title: "15 weeks straight", body: "Consistency widget updated", x: "42vw", y: "120px", delay: "3s" },
-  { title: "Push A", body: "Done in 64 min · 2 PRs", x: "-38vw", y: "110px", delay: "4.5s" },
-  { title: "Leaderboard", body: "#4 worldwide · strength", x: "36vw", y: "20px", delay: "6s" },
-  { title: "Squat", body: "+5 kg this month", x: "-42vw", y: "10px", delay: "7.5s" },
+const tabs = [
+  {
+    label: "log sets in seconds",
+    lead: "fast enough for between sets.",
+    body: "88 ready-made plans or your own, last time's weight and reps already filled in.",
+    src: "/screens/tracker.jpg",
+    alt: "Crank workout tracker with sets being logged",
+  },
+  {
+    label: "map every muscle",
+    lead: "see what you trained.",
+    body: "front and back, 14 muscles, colored by what you hit and what you skipped.",
+    src: "/screens/body-front.jpg",
+    alt: "Crank body map colored by trained muscles",
+  },
+  {
+    label: "chase your PRs",
+    lead: "know where you stand.",
+    body: "every lift graded from beginner to elite against lifters worldwide, with the gap to the next tier.",
+    src: "/screens/standards.jpg",
+    alt: "Crank PR standards per muscle",
+  },
+  {
+    label: "beat your friends",
+    lead: "lift for lift.",
+    body: "leaderboards by workouts, volume, strength or streak, worldwide or your country.",
+    src: "/screens/leaderboard-world.jpg",
+    alt: "Crank worldwide leaderboard podium",
+  },
 ];
 
 export function Hero() {
-  const [slide, setSlide] = useState(0);
+  const [active, setActive] = useState(0);
+  // Auto-advance until the visitor picks a tab, and never under reduced motion.
+  const [auto, setAuto] = useState(true);
+  const [paused, setPaused] = useState(false);
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   useEffect(() => {
-    const id = setInterval(() => setSlide((s) => (s + 1) % slides.length), INTERVAL);
-    return () => clearInterval(id);
-  }, []);
+    if (!auto || paused) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setTimeout(() => setActive((a) => (a + 1) % tabs.length), INTERVAL);
+    return () => clearTimeout(id);
+  }, [active, auto, paused]);
 
-  const current = slides[slide];
+  const select = (i: number) => {
+    setAuto(false);
+    setActive(i);
+  };
+
+  const tab = tabs[active];
 
   return (
-    <section className="px-2 pt-2">
-      <div className="relative overflow-hidden rounded-t-3xl pt-28 md:pt-32">
-        <div className="absolute inset-x-0 top-0 h-[85%] rounded-3xl bg-gradient-to-b from-[#1c1c1e] to-paper" />
-        <div className="cloud left-[-6%] top-[-4%] h-48 w-[40%]" />
-        <div className="cloud right-[-4%] top-[2%] h-40 w-[36%]" />
-        <div className="cloud left-[30%] top-[-8%] h-28 w-[30%] opacity-70" />
-        <div className="tunnel" />
-
-        <div className="relative z-10 flex flex-col items-center gap-6 px-4 text-center">
-          <h1 className="text-display max-w-[760px]">The toolkit for a better you</h1>
-          <p className="text-lead max-w-[600px] text-ink/60">
-            Starting with Crank, the workout tracker built for speed. More is on the way.
-          </p>
-          <PillButton href={APP_STORE} className="mt-2">
-            Get
-          </PillButton>
+    <section className="mx-auto max-w-[1200px] px-5 pt-28 md:px-10 md:pt-42">
+      <div className="flex flex-col items-center text-center">
+        <h1 className="text-display text-balance">
+          healthmaxxing{" "}
+          <span className="block font-serif italic tracking-[-0.02em] text-faint">
+            without distractions{" "}
+            <span className="inline-block not-italic [font-family:'Apple_Color_Emoji','Segoe_UI_Emoji',sans-serif]">
+              🍵
+            </span>
+          </span>
+        </h1>
+        <p className="mt-8 max-w-[600px] text-balance text-[16px] leading-relaxed text-dim">
+          Your phone, turned into a companion for your body, mind and soul. Starting with Crank, the workout tracker
+          built for strength. Made in Switzerland.
+        </p>
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <Pill href={APP_STORE} arrow>
+            Get Crank
+          </Pill>
+          <Pill href="#features" variant="panel">
+            See what it does
+          </Pill>
         </div>
+      </div>
 
-        <div className="pointer-events-none absolute inset-0 hidden md:block" aria-hidden="true">
-          {flyers.map((f) => (
-            <div
-              key={f.title}
-              className="fly flex w-56 items-center gap-3 rounded-2xl bg-mist/90 p-3 text-left ring-1 ring-inset ring-white/10 backdrop-blur"
-              style={{ "--fly-x": f.x, "--fly-y": f.y, "--fly-delay": f.delay } as React.CSSProperties}
-            >
-              <AppIcon app="crank" className="w-10 shadow-none" />
-              <div>
-                <p className="text-[13px] font-semibold leading-tight">{f.title}</p>
-                <p className="text-[12px] text-ink/60">{f.body}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="relative z-10 mx-auto mt-12 flex h-[520px] w-full max-w-[560px] justify-center md:h-[600px]">
-          <div className="relative h-fit">
-            <Phone className="w-[290px] md:w-[320px]">
-              {slides.map((s, i) => (
+      <div
+        className="mt-16 flex flex-col items-center md:mt-20"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocus={() => setPaused(true)}
+        onBlur={() => setPaused(false)}
+      >
+        <div className="relative h-[480px] w-full overflow-hidden sm:h-[560px]">
+          <div className="flex justify-center">
+            <Phone className="w-[290px] sm:w-[330px]">
+              {tabs.map((t, i) => (
                 <div
-                  key={s.src}
-                  className={cn(
-                    "absolute inset-0 transition-opacity duration-700",
-                    i === slide ? "opacity-100" : "opacity-0",
-                  )}
-                  aria-hidden={i !== slide}
+                  key={t.src}
+                  id={`hero-panel-${i}`}
+                  role="tabpanel"
+                  aria-labelledby={`hero-tab-${i}`}
+                  className={cn("absolute inset-0 transition-opacity duration-700", i === active ? "opacity-100" : "opacity-0")}
+                  aria-hidden={i !== active}
                 >
-                  <Shot src={s.src} alt={s.alt} />
+                  <Shot src={t.src} alt={t.alt} sizes="330px" priority={i === 0} />
                 </div>
               ))}
             </Phone>
           </div>
-          <div className="absolute bottom-28 right-[-2%] z-30 hidden w-44 md:flex flex-col gap-4 rounded-[36px] bg-mist p-5 text-white shadow-[0_40px_80px_-30px_rgba(0,0,0,0.8)] ring-1 ring-inset ring-white/10 md:right-[2%] md:w-56">
-            <div className="flex items-center justify-between">
-              <AppIcon app="crank" className="w-9 md:w-11" />
-              <span className="flex gap-1.5">
-                {slides.map((s, i) => (
-                  <span
-                    key={s.src}
-                    className={cn("size-1.5 rounded-full transition-colors", i === slide ? "bg-white" : "bg-white/25")}
-                  />
-                ))}
-              </span>
-            </div>
-            <div key={slide} className="animate-in fade-in slide-in-from-bottom-1 duration-500">
-              <p className="text-[30px] font-semibold leading-none md:text-[36px]">{current.stat}</p>
-              <p className="mt-1 text-[12px] text-white/60 md:text-[13px]">{current.label}</p>
-            </div>
-          </div>
+          {/* phone dissolves into the page */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-paper" />
         </div>
 
-        {/* fade the cut-off phone and halo into the next section */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-56 bg-gradient-to-b from-transparent to-paper" />
+        {/* wraps to two rows on phones so every tab stays visible */}
+        <div
+          role="tablist"
+          aria-label="What Crank does"
+          className="-mt-6 flex max-w-full flex-wrap justify-center gap-1 rounded-[26px] bg-panel p-1 sm:flex-nowrap sm:rounded-full"
+        >
+          {tabs.map((t, i) => (
+            <button
+              key={t.label}
+              ref={(el) => {
+                tabRefs.current[i] = el;
+              }}
+              id={`hero-tab-${i}`}
+              role="tab"
+              type="button"
+              aria-selected={i === active}
+              aria-controls={`hero-panel-${i}`}
+              tabIndex={i === active ? 0 : -1}
+              onClick={() => select(i)}
+              onKeyDown={(e) => {
+                let next: number;
+                if (e.key === "ArrowRight") next = (active + 1) % tabs.length;
+                else if (e.key === "ArrowLeft") next = (active + tabs.length - 1) % tabs.length;
+                else if (e.key === "Home") next = 0;
+                else if (e.key === "End") next = tabs.length - 1;
+                else return;
+                e.preventDefault();
+                select(next);
+                tabRefs.current[next]?.focus();
+              }}
+              className={cn(
+                "relative shrink-0 cursor-pointer whitespace-nowrap rounded-full px-4 py-2.5 text-[13px] transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:px-5 sm:text-sm",
+                i === active ? "text-ink" : "text-dim hover:text-ink",
+              )}
+            >
+              {i === active && (
+                <span className="absolute inset-0 rounded-full bg-paper shadow-[0_4px_28px_rgba(0,0,0,0.07)]" />
+              )}
+              <span className="relative">{t.label}</span>
+            </button>
+          ))}
+        </div>
+
+        {/* the live region stays mounted; only its text is swapped */}
+        <p
+          aria-live="polite"
+          className="mt-6 min-h-[3.2em] max-w-[440px] text-balance text-center text-[16px] leading-relaxed text-dim"
+        >
+          <span key={active} className="block motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-1 motion-safe:duration-500">
+            <span className="text-ink">{tab.lead}</span> {tab.body}
+          </span>
+        </p>
       </div>
     </section>
   );

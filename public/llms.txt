@@ -1,26 +1,27 @@
 # emptea
 
-> emptea studios is a small app studio in Switzerland making focused iPhone apps. Its first app is Crank, a fast workout tracker for strength training. Crank is free on the App Store.
+> emptea studios is a small app studio in Switzerland making focused iPhone apps. Its first app is Crank, a workout tracker for strength training, available on the App Store.
 
 ## Crank
 
-Crank is a native iPhone workout tracker built for speed.
+Crank (App Store name: "Crank: Gym & Workout Tracker") is a native iPhone workout tracker built for strength. iPhone only, iOS 26 or later.
 
-- Log sets in seconds with templates and folders (for example a Push / Pull / Legs split); Crank remembers the weight and reps from last time.
-- Body map: front and back, colored by the muscles you trained and the ones you skipped, weakest muscle first.
-- PRs and strength standards: every lift graded from beginner to elite, with the gap to the next tier.
-- Activity heatmap and a streak that counts weeks, not days.
-- Leaderboards by strength, volume or consistency, worldwide or among friends, plus a feed of shared workouts.
-- Share cards for Instagram Stories and group chats.
-- Rest timer as a Live Activity on the Lock Screen, Home Screen widgets, Apple Health sync (steps and bodyweight in, workouts out), Siri Shortcuts and Spotlight.
-- Hundreds of exercises with graphics, target muscles and full history; custom exercises.
-- 9 city themes with light and dark modes. Available in 28 languages.
+- Log sets in seconds. 88 ready-made plans for gym, home and calisthenics (each at beginner, intermediate and advanced, 3 to 6 days a week), or build your own templates and folders. Crank remembers the weight and reps from last time.
+- Nearly 400 exercises with step-by-step instructions, target muscles and your full history per lift. Custom exercises.
+- Body map: front and back, 14 muscles, colored by what you trained. Tap a muscle for its strength standards.
+- PRs and strength standards: every lift graded from beginner to elite (6 tiers) against worldwide data, with the gap to the next tier.
+- Analytics: year heatmap, muscle balance, weekly volume, workouts per week, session length, bodyweight and steps. A streak that counts weeks, not days.
+- Leaderboards (worldwide or by country) across workouts, time, volume, best session, strength, streak, exercises and steps. Head-to-head comparison with friends. Feed of shared workouts.
+- Share cards for Instagram Stories and group chats. Strength Wrapped at the end of the year.
+- Rest timer as a Live Activity on the Lock Screen and in the Dynamic Island. Home Screen and Lock Screen widgets, Controls, Siri Shortcuts, Spotlight. Apple Health sync: weight and steps in, workouts out.
+- 9 city themes with light and dark modes. 10 app icons. Available in 28 languages.
+- Pricing: Crank Ultra is one plan with everything included. Eligible new subscribers start with a free trial, then a yearly subscription or a one-time lifetime purchase. Prices are shown in the app.
 
 Download: https://apps.apple.com/app/id6757124183
 
 ## More from emptea
 
-Two more apps are in development. Details have not been announced.
+Two more apps are in development: FlexMax (flexibility) and Rise (a quieter mind). Details have not been announced.
 
 ## Links
 

@@ -1,71 +1,76 @@
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { APP_STORE, AppIcon, CONTACT, WAITLIST, Wordmark } from "@/components/home/brand";
+import { APP_STORE, CONTACT, WAITLIST, Wordmark } from "@/components/home/brand";
+import { MobileMenu } from "@/components/home/mobile-menu";
 import { cn } from "@/lib/utils";
 
-export function PillButton({
+/** Pill button. `brand` is the orange primary, `panel` the grey secondary. */
+export function Pill({
   href,
   children,
-  size = "md",
+  variant = "brand",
+  arrow = false,
   className,
 }: {
   href: string;
   children: React.ReactNode;
-  size?: "sm" | "md";
+  variant?: "brand" | "panel";
+  arrow?: boolean;
   className?: string;
 }) {
   return (
     <Button
       asChild
       className={cn(
-        "h-auto rounded-full bg-ink font-medium text-paper hover:bg-ink/90 [&_svg:not([class*='size-'])]:size-5",
-        size === "sm" ? "px-5 py-2 text-[16px]" : "px-6 py-3 text-[16px]",
+        "h-auto min-h-10 gap-2 rounded-full px-4 py-2 text-xs font-normal transition-[background-color,transform] duration-200 active:scale-[0.96] sm:min-h-11 sm:px-6 sm:py-3 sm:text-sm",
+        variant === "brand" && "bg-brand text-white hover:bg-brand-hover",
+        variant === "panel" && "bg-panel text-ink hover:bg-panel-hover",
         className,
       )}
     >
       <a href={href}>
         {children}
+        {arrow && <ArrowRight className="size-4 shrink-0" strokeWidth={1.75} />}
       </a>
     </Button>
   );
 }
 
+const navLinks = [
+  { label: "Features", href: "#features" },
+  { label: "Setup", href: "#setup" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "FAQ", href: "#faq" },
+];
+
 export function Nav() {
   return (
-    <header className="fixed inset-x-0 top-4 z-50 flex justify-center px-4">
-      <nav className="flex items-center gap-2 rounded-[32px] bg-mist/70 p-2 ring-1 ring-inset ring-white/10 text-[18px] font-medium text-ink backdrop-blur-xl">
-        <Link href="/" className="px-4 py-1.5" aria-label="emptea home">
+    <header className="fixed inset-x-0 top-0 z-40 bg-paper/70 text-ink backdrop-blur-xl backdrop-saturate-150">
+      <nav className="relative mx-auto flex h-16 max-w-[1600px] items-center justify-between gap-3 px-4 sm:h-20 sm:px-8 lg:px-16">
+        <Link href="/" aria-label="emptea home" className="inline-flex min-h-11 items-center">
           <Wordmark />
         </Link>
-        <div className="flex items-center gap-1">
-          <a href="#apps" className="hidden rounded-full px-4 py-1.5 transition-colors hover:bg-white/10 sm:block">
-            Apps
+
+        <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 text-sm md:flex">
+          {navLinks.map((l) => (
+            <li key={l.label}>
+              <a href={l.href} className="inline-flex min-h-11 items-center transition-colors hover:text-dim">
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex items-center gap-3 sm:gap-5">
+          <a href={CONTACT} className="hidden min-h-11 items-center text-sm transition-colors hover:text-dim md:inline-flex">
+            Contact
           </a>
-          <a href="#crank" className="hidden rounded-full px-4 py-1.5 transition-colors hover:bg-white/10 sm:block">
-            Crank
-          </a>
-          <PillButton href={APP_STORE} size="sm">
-            Get
-          </PillButton>
+          <Pill href={APP_STORE}>Get Crank</Pill>
+          <MobileMenu links={navLinks} />
         </div>
       </nav>
     </header>
-  );
-}
-
-/** Fixed "Join now" pill, bottom right: a raised, lit-from-above button. */
-export function JoinPill() {
-  return (
-    <a
-      href={APP_STORE}
-      className="fixed bottom-5 right-5 z-40 flex items-center gap-2.5 rounded-full bg-gradient-to-b from-[#fafafa] to-[#d4d4d6] py-2 pl-2 pr-5 text-[16px] font-semibold text-[#111] shadow-[inset_0_1px_0_rgba(255,255,255,0.95),inset_0_-3px_6px_rgba(0,0,0,0.14),0_1px_2px_rgba(0,0,0,0.6),0_12px_28px_-8px_rgba(0,0,0,0.9)] ring-1 ring-black/40 transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.95),inset_0_-3px_6px_rgba(0,0,0,0.14),0_2px_4px_rgba(0,0,0,0.6),0_18px_36px_-10px_rgba(0,0,0,0.9)] active:translate-y-0 active:shadow-[inset_0_2px_6px_rgba(0,0,0,0.25),0_1px_2px_rgba(0,0,0,0.6)]"
-    >
-      <AppIcon
-        app="crank"
-        className="w-8 rounded-full shadow-[inset_0_1px_2px_rgba(0,0,0,0.2),0_1px_1px_rgba(255,255,255,0.8)]"
-      />
-      Join now
-    </a>
   );
 }
 
@@ -73,7 +78,7 @@ const footerCols = [
   {
     title: "Apps",
     links: [
-      { label: "Crank", href: "#crank" },
+      { label: "Crank", href: APP_STORE },
       { label: "FlexMax", href: "#apps" },
       { label: "Rise", href: "#apps" },
     ],
@@ -84,100 +89,54 @@ const footerCols = [
       { label: "App Store", href: APP_STORE },
       { label: "Waitlist", href: WAITLIST },
       { label: "Contact", href: CONTACT },
+      { label: "TikTok", href: "https://www.tiktok.com/@get.crank" },
+      { label: "Instagram", href: "https://www.instagram.com/get.crank" },
     ],
   },
   {
     title: "Legal",
     links: [
-      { label: "Terms of Service", href: "/terms-of-service" },
-      { label: "Privacy Policy", href: "/privacy-policy" },
+      { label: "Terms of service", href: "/terms-of-service" },
+      { label: "Privacy policy", href: "/privacy-policy" },
       { label: "EULA", href: "/eula" },
     ],
   },
 ];
 
-const glyph = "size-5 fill-none stroke-current [stroke-linecap:round] [stroke-linejoin:round] [stroke-width:2]";
-
-// Fill in the handles; entries without an href stay hidden.
-const socials: { label: string; href: string; icon: React.ReactNode }[] = [
-  {
-    label: "TikTok",
-    href: "https://www.tiktok.com/@get.crank",
-    icon: (
-      <svg viewBox="0 0 24 24" className={glyph}>
-        <path d="M14 4v10.5a3.5 3.5 0 1 1-3.5-3.5" />
-        <path d="M14 4c.5 2.8 2.3 4.4 5 4.5" />
-      </svg>
-    ),
-  },
-  {
-    label: "X",
-    href: "",
-    icon: (
-      <svg viewBox="0 0 24 24" className={glyph}>
-        <path d="M4 4l16 16M20 4L4 20" />
-      </svg>
-    ),
-  },
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/get.crank",
-    icon: (
-      <svg viewBox="0 0 24 24" className={glyph}>
-        <rect x="3" y="3" width="18" height="18" rx="5" />
-        <circle cx="12" cy="12" r="4" />
-        <circle cx="17.5" cy="6.5" r="0.6" className="fill-current" />
-      </svg>
-    ),
-  },
-  {
-    label: "YouTube",
-    href: "",
-    icon: (
-      <svg viewBox="0 0 24 24" className={glyph}>
-        <rect x="2.5" y="5" width="19" height="14" rx="4" />
-        <path d="M10 9.5v5l4.5-2.5z" className="fill-current" />
-      </svg>
-    ),
-  },
-];
+// Social profiles open in a new tab; the App Store link stays in-tab so iOS can hand it to the App Store app.
+const newTab = (href: string) => /^https?:/.test(href) && !href.includes("apps.apple.com");
 
 export function Footer() {
   return (
-    <footer className="px-6 pb-16 pt-24 md:px-8">
-      <div className="mx-auto grid max-w-[1376px] gap-12 md:grid-cols-[2fr_1fr_1fr_1fr]">
-        <div className="flex flex-col gap-2">
-          <Wordmark />
-          <p className="text-[14px] text-ink/60">© emptea studios 2026</p>
+    <footer className="mx-auto max-w-[1200px] px-5 pb-8 md:px-10">
+      <div className="grid grid-cols-2 gap-10 px-3 py-16 text-sm md:grid-cols-[2fr_1fr_1fr_1fr]">
+        <div className="col-span-2 md:col-span-1">
+          <Link href="/" aria-label="emptea home" className="inline-flex min-h-11 items-center">
+            <Wordmark className="text-2xl" />
+          </Link>
+          <p className="mt-3 text-dim">Healthmaxxing without distractions.</p>
         </div>
         {footerCols.map((col) => (
-          <div key={col.title} className="flex flex-col gap-3">
-            <h2 className="text-[18px] font-semibold text-ink/60">{col.title}</h2>
-            <ul className="flex flex-col gap-2 text-[16px] font-medium">
-              {col.links.map((l) => (
-                <li key={l.label}>
-                  <a href={l.href} className="transition-opacity hover:opacity-60">
-                    {l.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <nav key={col.title} aria-label={col.title} className="flex flex-col items-start">
+            <p className="mb-3 text-dim">{col.title}</p>
+            {col.links.map((l) => (
+              <a
+                key={l.label}
+                href={l.href}
+                {...(newTab(l.href) ? { target: "_blank", rel: "noopener" } : {})}
+                className="inline-flex min-h-10 items-center transition-colors hover:text-dim"
+              >
+                {l.label}
+              </a>
+            ))}
+          </nav>
         ))}
       </div>
-      <div className="mx-auto mt-24 flex max-w-[1376px] flex-wrap items-center justify-between gap-6">
-        <ul className="flex items-center gap-5">
-          {socials
-            .filter((s) => s.href)
-            .map((s) => (
-              <li key={s.label}>
-                <a href={s.href} aria-label={s.label} className="block text-ink transition-opacity hover:opacity-60">
-                  {s.icon}
-                </a>
-              </li>
-            ))}
-        </ul>
+      <div className="flex flex-wrap items-center justify-between gap-5 pl-3 text-xs text-dim">
+        <span>© 2026 emptea studios</span>
+        <span>Made in Switzerland</span>
       </div>
+      <p className="mt-6 pl-3 text-xs text-dim">Crank is on the App Store. FlexMax and Rise are in development.</p>
     </footer>
   );
 }
