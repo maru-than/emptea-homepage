@@ -79,6 +79,7 @@ const footerCols = [
     title: "Apps",
     links: [
       { label: "Crank", href: APP_STORE },
+      { label: "friggy", href: "#friggy" },
       { label: "FlexMax", href: "#apps" },
       { label: "Rise", href: "#apps" },
     ],
@@ -99,6 +100,7 @@ const footerCols = [
       { label: "Terms of service", href: "/terms-of-service" },
       { label: "Privacy policy", href: "/privacy-policy" },
       { label: "EULA", href: "/eula" },
+      { label: "Support", href: "/support" },
     ],
   },
 ];
@@ -136,7 +138,9 @@ export function Footer() {
         <span>© 2026 emptea studios</span>
         <span>Made in Switzerland</span>
       </div>
-      <p className="mt-6 pl-3 text-xs text-dim">Crank is on the App Store. FlexMax and Rise are in development.</p>
+      <p className="mt-6 pl-3 text-xs text-dim">
+        Crank is on the App Store. friggy is coming soon. FlexMax and Rise are in development.
+      </p>
     </footer>
   );
 }

@@ -14,8 +14,12 @@ export function Container({ id, className, children }: { id?: string; className?
 }
 
 /** Light grey rounded surface every feature sits on. */
-export function Panel({ className, children }: { className?: string; children: React.ReactNode }) {
-  return <div className={cn("relative isolate overflow-hidden rounded-panel bg-panel", className)}>{children}</div>;
+export function Panel({ id, className, children }: { id?: string; className?: string; children: React.ReactNode }) {
+  return (
+    <div id={id} className={cn("relative isolate overflow-hidden rounded-panel bg-panel", className)}>
+      {children}
+    </div>
+  );
 }
 
 /** Two-line section heading: first line ink, second line grey. The space keeps the accessible name readable. */

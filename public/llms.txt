@@ -19,6 +19,16 @@ Crank (App Store name: "Crank: Gym & Workout Tracker") is a native iPhone workou
 
 Download: https://apps.apple.com/app/id6757124183
 
+## friggy
+
+friggy is an iPhone app that turns a photo of your fridge into recipes: snap your fridge, find your next meal. It is coming soon to the App Store.
+
+- AI recognises the ingredients in a fridge photo and suggests three recipes that use them.
+- Step-by-step recipes with a built-in cooking timer.
+- A private log of every dish you cooked, with your own plate photo.
+- "cooked today.": optionally share your plate with other friggy users for a day.
+- Free with 3 fridge scans per week; friggy+ is an optional monthly or yearly subscription.
+
 ## More from emptea
 
 Two more apps are in development: FlexMax (flexibility) and Rise (a quieter mind). Details have not been announced.
@@ -30,4 +40,5 @@ Two more apps are in development: FlexMax (flexibility) and Rise (a quieter mind
 - [Privacy Policy](https://emptea.xyz/privacy-policy)
 - [Terms of Service](https://emptea.xyz/terms-of-service)
 - [EULA](https://emptea.xyz/eula)
+- [Support](https://emptea.xyz/support)
 - Contact: emptea.studios@gmail.com

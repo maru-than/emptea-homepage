@@ -3,13 +3,15 @@ import { cn } from "@/lib/utils";
 export function LegalHeader({
   title,
   updated,
+  eyebrow = "Legal",
 }: {
   title: string;
   updated: string;
+  eyebrow?: string;
 }) {
   return (
     <header className="pb-10">
-      <p className="text-sm text-dim">Legal</p>
+      <p className="text-sm text-dim">{eyebrow}</p>
       <h1 className="mt-2 text-[36px] leading-[1.1] tracking-[-0.04em]">{title}</h1>
       <p className="mt-4 text-sm text-muted-foreground">
         Last updated: {updated}
@@ -28,13 +30,15 @@ export function LegalIntro({ children }: { children: React.ReactNode }) {
 
 export function LegalSection({
   title,
+  id,
   children,
 }: {
   title: string;
+  id?: string;
   children: React.ReactNode;
 }) {
   return (
-    <section className="space-y-3">
+    <section id={id} className="space-y-3">
       <h2 className="text-[20px] tracking-[-0.02em]">{title}</h2>
       {children}
     </section>

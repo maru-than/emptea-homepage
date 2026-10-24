@@ -1,3 +1,8 @@
+# Vercel installs this repo with pnpm 9, which rejects a workspace file that has no
+# packages list. The root is the only package; allowBuilds is for local pnpm 10.
+packages:
+  - "."
+
 allowBuilds:
   sharp: true
   unrs-resolver: true

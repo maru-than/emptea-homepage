@@ -9,6 +9,7 @@ export const CONTACT = "mailto:emptea.studios@gmail.com";
 export const apps = {
   // Crank's real App Store icon (Classic): white Atlas figure on the #004A68 gradient.
   crank: { name: "Crank", icon: null, image: "/crank-icon.png", from: "#1f5a7a", to: "#004a68" },
+  friggy: { name: "friggy", icon: null, image: "/friggy-icon.png", from: "#fffdf5", to: "#fffdf5" },
   flexmax: { name: "FlexMax", icon: PersonStanding, image: null, from: "#5fdc8a", to: "#1f9e52" },
   rise: { name: "Rise", icon: Sunrise, image: null, from: "#ffb27a", to: "#f0612e" },
 };
@@ -24,6 +25,7 @@ export function AppIcon({ app, className }: { app: AppId; className?: string }) 
       aria-label={name}
       className={cn(
         "relative flex aspect-square w-20 items-center justify-center overflow-hidden rounded-[22.5%] shadow-[0_6px_18px_-8px_rgba(0,0,0,0.24)]",
+        image && "ring-1 ring-inset ring-black/10",
         className,
       )}
       style={{ background: `linear-gradient(160deg, ${from}, ${to})` }}

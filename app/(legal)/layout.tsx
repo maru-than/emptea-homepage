@@ -35,6 +35,9 @@ export default function LegalLayout({
             <Link href="/eula" className="hover:text-ink">
               EULA
             </Link>
+            <Link href="/support" className="hover:text-ink">
+              Support
+            </Link>
           </nav>
         </div>
       </footer>

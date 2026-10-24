@@ -124,7 +124,7 @@ const teasers: { app: AppId; name: string; hint: string }[] = [
 const story: { who: string; lines: string[]; you?: boolean }[] = [
   { who: "emptea", lines: ["hey 👋 we're a small app studio in Switzerland.", "most health apps want you to keep scrolling."] },
   { who: "emptea", lines: ["you came to log a set and get back to it.", "so we built Crank. fast, focused, done in minutes."] },
-  { who: "emptea", lines: ["two more apps are on the way. same idea, for flexibility and for your mind."] },
+  { who: "emptea", lines: ["more apps are on the way. next up friggy: snap your fridge, find your next meal."] },
   { who: "you", lines: ["i'm in 🙌"], you: true },
 ];
 
@@ -176,12 +176,13 @@ export default function Page() {
               <Panel className="flex min-h-[300px] flex-col p-8 md:row-span-2 md:min-h-[536px]">
                 <div className="flex gap-3">
                   <AppIcon app="crank" className="w-11" />
+                  <AppIcon app="friggy" className="w-11" />
                   <AppIcon app="flexmax" className="w-11 blur-[2px] grayscale-[0.4]" />
                   <AppIcon app="rise" className="w-11 blur-[2px] grayscale-[0.4]" />
                 </div>
                 <h3 className="mt-auto text-[24px] leading-[1.08] tracking-[-0.045em] lg:text-[32px]">
                   1 app out{" "}
-                  <span className="block text-dim">2 on the way</span>
+                  <span className="block text-dim">3 on the way</span>
                 </h3>
               </Panel>
 
@@ -356,6 +357,29 @@ export default function Page() {
                   </Panel>
                 ))}
               </div>
+
+              <Panel id="friggy" className="grid scroll-mt-28 md:grid-cols-2 lg:col-span-3">
+                <div className="order-2 flex h-[380px] justify-center overflow-hidden pt-10 md:order-1 md:h-[480px]">
+                  <Phone className="w-[250px]">
+                    <Shot
+                      src="/screens/friggy-explore.jpg"
+                      alt="friggy Explore tab with recipes for what's in the fridge"
+                      sizes="250px"
+                    />
+                  </Phone>
+                </div>
+                <div className="order-1 flex flex-col items-start justify-center gap-5 p-8 md:order-2 md:p-12">
+                  <AppIcon app="friggy" className="w-14" />
+                  <h3 className="text-title">
+                    friggy{" "}
+                    <span className="block text-dim">coming soon</span>
+                  </h3>
+                  <p className="max-w-[360px] text-sm leading-relaxed text-dim">
+                    <span className="text-ink">Snap your fridge. Find your next meal.</span> Three recipes from what you
+                    already have, a timer while you cook and a log of every plate.
+                  </p>
+                </div>
+              </Panel>
             </div>
           </Container>
 

@@ -24,6 +24,10 @@ const questions = [
     a: "Crank is made for iPhone, iOS 26 or later. It speaks 28 languages and comes with 9 city themes, each in light and dark.",
   },
   {
+    q: "What is friggy?",
+    a: "The next emptea app. Snap a photo of your fridge and friggy suggests three recipes from what you already have, with a timer while you cook and a log of every plate. Coming soon to the App Store.",
+  },
+  {
     q: "What are FlexMax and Rise?",
     a: "The next two emptea apps, one for flexibility and one for a quieter mind. Both are still in development.",
   },
