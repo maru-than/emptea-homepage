@@ -5,6 +5,7 @@ import { Footer, Nav, Pill } from "@/components/home/chrome";
 import { Faq } from "@/components/home/faq";
 import { CheckList, Container, FeatureRow, MockCard, Panel, SectionTitle, Stat } from "@/components/home/feature";
 import { Hero } from "@/components/home/hero";
+import { Marquee } from "@/components/home/marquee";
 import { Phone, Shot } from "@/components/home/phone";
 import { StructuredData } from "@/components/home/structured-data";
 import { cn } from "@/lib/utils";
@@ -228,23 +229,22 @@ export default function Page() {
           {/* Showcase */}
           <Container className="reveal">
             <SectionTitle title="everything between you" sub="and your next PR" />
-            <Panel className="marquee-wrap mt-14 md:mt-16">
-              <div className="edge-fade overflow-hidden py-12">
-                <div
-                  className="marquee gap-6 pr-6 md:gap-8 md:pr-8"
-                  style={{ "--marquee-duration": "80s" } as React.CSSProperties}
-                >
-                  {[0, 1].map((copy) =>
-                    showcase.map((shot) => (
-                      <div key={`${copy}-${shot.src}`} aria-hidden={copy === 1 || undefined}>
-                        <Phone className="w-[190px] md:w-[220px]">
-                          <Shot src={shot.src} alt={copy ? "" : shot.alt} sizes="220px" />
-                        </Phone>
-                      </div>
-                    )),
-                  )}
-                </div>
-              </div>
+            <Panel className="mt-14 md:mt-16">
+              <Marquee
+                duration={80}
+                className="edge-fade overflow-hidden py-12"
+                trackClassName="gap-6 pr-6 md:gap-8 md:pr-8"
+              >
+                {[0, 1].map((copy) =>
+                  showcase.map((shot) => (
+                    <div key={`${copy}-${shot.src}`} aria-hidden={copy === 1 || undefined}>
+                      <Phone className="w-[190px] md:w-[220px]">
+                        <Shot src={shot.src} alt={copy ? "" : shot.alt} sizes="220px" />
+                      </Phone>
+                    </div>
+                  )),
+                )}
+              </Marquee>
             </Panel>
           </Container>
 
