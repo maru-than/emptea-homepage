@@ -1,11 +1,14 @@
 import { Plus } from "lucide-react";
-import { WAITLIST } from "@/components/home/brand";
 
 // Answers stick to what Crank's own listing states (see public/llms.txt). No prices: they show in the app.
 const questions = [
   {
     q: "How much does Crank cost?",
     a: "Crank Ultra is one plan with everything in it. Eligible new subscribers start with a free trial, then it's a yearly subscription or a one-time lifetime purchase. Current prices show in the app.",
+  },
+  {
+    q: "Does Crank Ultra include friggy?",
+    a: "No. Every emptea app has its own subscription. Crank Ultra covers Crank, and friggy will have its own.",
   },
   {
     q: "Does Crank remember my last workout?",
@@ -27,10 +30,6 @@ const questions = [
     q: "What is friggy?",
     a: "The next emptea app. Snap a photo of your fridge and friggy suggests three recipes from what you already have, with a timer while you cook and a log of every plate. Coming soon to the App Store.",
   },
-  {
-    q: "What are FlexMax and Rise?",
-    a: "The next two emptea apps, one for flexibility and one for a quieter mind. Both are still in development.",
-  },
 ];
 
 export function Faq() {
@@ -42,17 +41,7 @@ export function Faq() {
             {item.q}
             <Plus className="faq-plus size-4 shrink-0 text-dim transition-transform duration-300" strokeWidth={1.5} />
           </summary>
-          <p className="max-w-[640px] pb-6 text-sm leading-relaxed text-dim">
-            {item.a}
-            {item.q.startsWith("What are") && (
-              <>
-                {" "}
-                <a href={WAITLIST} className="text-ink underline-offset-4 hover:underline">
-                  join the waitlist ↗
-                </a>
-              </>
-            )}
-          </p>
+          <p className="max-w-[640px] pb-6 text-sm leading-relaxed text-dim">{item.a}</p>
         </details>
       ))}
     </div>

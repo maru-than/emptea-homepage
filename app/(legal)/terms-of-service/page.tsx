@@ -106,7 +106,8 @@ export default function TermsOfServicePage() {
           <P>
             Paid features and subscriptions are sold and processed through the
             Apple App Store or Google Play unless stated otherwise in the app.
-            Subscriptions renew automatically until cancelled; you can cancel at
+            Each app is sold separately: a subscription or purchase in one app
+            does not unlock features in another. Subscriptions renew automatically until cancelled; you can cancel at
             any time in your Apple or Google account settings, and cancellation
             takes effect at the end of the current billing period. Refunds are
             handled by the store under its own policy. Prices may change with

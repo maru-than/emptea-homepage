@@ -51,9 +51,10 @@ export function CheckList({ items, className }: { items: string[]; className?: s
 }
 
 /**
- * Feature: grey panel with a cropped phone on one side, heading and checklist on the other.
- * `anchor` picks which end of the screen survives the crop: "top" shows the header, "bottom" the lower part
- * (for a Lock Screen, where the Live Activity sits).
+ * Feature card: one grey panel with the heading and checklist on one side and a cropped phone on the other
+ * (stacked on phones). Sized to fit the viewport so it can sit in a StackedCards deck; the phone rises into
+ * place as the card arrives (--enter). `anchor` picks which end of the screen survives the crop: "top" shows the
+ * header, "bottom" the lower part (for a Lock Screen, where the Live Activity sits).
  */
 export function FeatureRow({
   title,
@@ -73,26 +74,35 @@ export function FeatureRow({
   anchor?: "top" | "bottom";
 }) {
   return (
-    <section className="reveal grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-20">
-      <Panel className={cn("h-[420px] sm:h-[500px]", flip && "lg:order-2")}>
-        <div className={cn("flex h-full justify-center px-6", anchor === "top" ? "pt-10 sm:pt-14" : "items-end pb-10 sm:pb-14")}>
-          <Phone className={cn("w-[260px] sm:w-[290px]", anchor === "bottom" && "self-end")}>
-            <Shot src={src} alt={alt} sizes="290px" />
-          </Phone>
-        </div>
-      </Panel>
-
-      <div className={cn("flex flex-col items-start gap-8 px-1", flip && "lg:order-1")}>
-        <h2 className="text-heading">
+    <Panel className="grid h-[calc(100svh-10rem)] max-h-[720px] min-h-[500px] grid-rows-[auto_1fr] md:h-[560px] md:min-h-0 md:grid-cols-2 md:grid-rows-1">
+      <div className={cn("flex flex-col items-start gap-5 p-6 sm:p-8 md:justify-center md:gap-8 md:p-12", flip && "md:order-2")}>
+        <h2 className="text-[28px] leading-[1.08] font-normal tracking-[-0.04em] md:text-heading">
           {title}{" "}
-          <span className="block whitespace-pre-line text-faint">{sub}</span>
+          <span className="block text-faint md:whitespace-pre-line">{sub}</span>
         </h2>
-        <CheckList items={points} />
-        <Pill href={APP_STORE} arrow>
+        <CheckList items={points} className="gap-2.5 md:gap-3" />
+        <Pill href={APP_STORE} arrow className="hidden md:inline-flex">
           Get Crank
         </Pill>
       </div>
-    </section>
+
+      <div
+        className={cn(
+          "flex min-h-0 justify-center overflow-hidden px-6",
+          anchor === "top" ? "pt-2 md:pt-14" : "items-end pb-6 md:pb-14",
+          flip && "md:order-1",
+        )}
+      >
+        <div
+          className="will-change-transform"
+          style={{ transform: "translate3d(0, calc((1 - var(--enter, 1)) * 64px), 0)" }}
+        >
+          <Phone className="w-[240px] sm:w-[260px] md:w-[290px]">
+            <Shot src={src} alt={alt} sizes="290px" />
+          </Phone>
+        </div>
+      </div>
+    </Panel>
   );
 }
 

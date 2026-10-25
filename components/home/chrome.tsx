@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { APP_STORE, CONTACT, WAITLIST, Wordmark } from "@/components/home/brand";
+import { APP_STORE, CONTACT, Wordmark } from "@/components/home/brand";
 import { MobileMenu } from "@/components/home/mobile-menu";
 import { cn } from "@/lib/utils";
 
@@ -80,15 +80,12 @@ const footerCols = [
     links: [
       { label: "Crank", href: APP_STORE },
       { label: "friggy", href: "#friggy" },
-      { label: "FlexMax", href: "#apps" },
-      { label: "Rise", href: "#apps" },
     ],
   },
   {
     title: "Studio",
     links: [
       { label: "App Store", href: APP_STORE },
-      { label: "Waitlist", href: WAITLIST },
       { label: "Contact", href: CONTACT },
       { label: "TikTok", href: "https://www.tiktok.com/@get.crank" },
       { label: "Instagram", href: "https://www.instagram.com/get.crank" },
@@ -138,9 +135,7 @@ export function Footer() {
         <span>© 2026 emptea studios</span>
         <span>Made in Switzerland</span>
       </div>
-      <p className="mt-6 pl-3 text-xs text-dim">
-        Crank is on the App Store. friggy is coming soon. FlexMax and Rise are in development.
-      </p>
+      <p className="mt-6 pl-3 text-xs text-dim">Crank is on the App Store. friggy is coming soon.</p>
     </footer>
   );
 }

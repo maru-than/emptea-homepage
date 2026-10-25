@@ -15,7 +15,7 @@ Crank (App Store name: "Crank: Gym & Workout Tracker") is a native iPhone workou
 - Share cards for Instagram Stories and group chats. Strength Wrapped at the end of the year.
 - Rest timer as a Live Activity on the Lock Screen and in the Dynamic Island. Home Screen and Lock Screen widgets, Controls, Siri Shortcuts, Spotlight. Apple Health sync: weight and steps in, workouts out.
 - 9 city themes with light and dark modes. 10 app icons. Available in 28 languages.
-- Pricing: Crank Ultra is one plan with everything included. Eligible new subscribers start with a free trial, then a yearly subscription or a one-time lifetime purchase. Prices are shown in the app.
+- Pricing: Crank Ultra is one plan with everything included. Eligible new subscribers start with a free trial, then a yearly subscription or a one-time lifetime purchase. Prices are shown in the app. Crank Ultra covers Crank only.
 
 Download: https://apps.apple.com/app/id6757124183
 
@@ -29,9 +29,9 @@ friggy is an iPhone app that turns a photo of your fridge into recipes: snap you
 - "cooked today.": optionally share your plate with other friggy users for a day.
 - Free with 3 fridge scans per week; friggy+ is an optional monthly or yearly subscription.
 
-## More from emptea
+## Subscriptions
 
-Two more apps are in development: FlexMax (flexibility) and Rise (a quieter mind). Details have not been announced.
+Every emptea app has its own subscription. A subscription to one app does not include another: Crank Ultra covers Crank, friggy+ covers friggy.
 
 ## Links
 

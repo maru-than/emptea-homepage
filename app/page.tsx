@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { Check, HeartPulse, Languages, LayoutGrid, Mic, Search, SlidersHorizontal, Timer } from "lucide-react";
-import { APP_STORE, AppIcon, type AppId, CONTACT, Mark, WAITLIST } from "@/components/home/brand";
+import { APP_STORE, AppIcon, CONTACT, Mark } from "@/components/home/brand";
 import { Footer, Nav, Pill } from "@/components/home/chrome";
 import { Faq } from "@/components/home/faq";
 import { CheckList, Container, FeatureRow, MockCard, Panel, SectionTitle, Stat } from "@/components/home/feature";
 import { Hero } from "@/components/home/hero";
 import { Marquee } from "@/components/home/marquee";
 import { Phone, Shot } from "@/components/home/phone";
+import { StackedCards } from "@/components/home/stacked-cards";
 import { StructuredData } from "@/components/home/structured-data";
 import { cn } from "@/lib/utils";
 
@@ -117,15 +118,14 @@ const muscles = [
   { m: "Legs", v: 38, c: "#ffc15e" },
 ];
 
-const teasers: { app: AppId; name: string; hint: string }[] = [
-  { app: "flexmax", name: "FlexMax", hint: "something for flexibility. that's all we'll say for now." },
-  { app: "rise", name: "Rise", hint: "something for a quieter mind. more soon." },
-];
-
 const story: { who: string; lines: string[]; you?: boolean }[] = [
-  { who: "emptea", lines: ["hey 👋 we're a small app studio in Switzerland.", "most health apps want you to keep scrolling."] },
-  { who: "emptea", lines: ["you came to log a set and get back to it.", "so we built Crank. fast, focused, done in minutes."] },
-  { who: "emptea", lines: ["more apps are on the way. next up friggy: snap your fridge, find your next meal."] },
+  {
+    who: "emptea",
+    lines: [
+      "hey 👋 we're emptea, a small app studio in Switzerland.",
+      "most health apps want you to keep scrolling. we built Crank so you can log your set and get back to it. friggy is next.",
+    ],
+  },
   { who: "you", lines: ["i'm in 🙌"], you: true },
 ];
 
@@ -178,12 +178,10 @@ export default function Page() {
                 <div className="flex gap-3">
                   <AppIcon app="crank" className="w-11" />
                   <AppIcon app="friggy" className="w-11" />
-                  <AppIcon app="flexmax" className="w-11 blur-[2px] grayscale-[0.4]" />
-                  <AppIcon app="rise" className="w-11 blur-[2px] grayscale-[0.4]" />
                 </div>
                 <h3 className="mt-auto text-[24px] leading-[1.08] tracking-[-0.045em] lg:text-[32px]">
                   1 app out{" "}
-                  <span className="block text-dim">3 on the way</span>
+                  <span className="block text-dim">1 on the way</span>
                 </h3>
               </Panel>
 
@@ -249,16 +247,18 @@ export default function Page() {
           </Container>
 
           {/* Features */}
-          <Container id="features" className="flex scroll-mt-28 flex-col gap-28 md:gap-36">
-            {features.map((f, i) => (
-              <FeatureRow key={f.title} {...f} flip={i % 2 === 1} />
-            ))}
+          <Container id="features" className="scroll-mt-28">
+            <StackedCards className="gap-6 md:gap-10">
+              {features.map((f, i) => (
+                <FeatureRow key={f.title} {...f} flip={i % 2 === 1} />
+              ))}
+            </StackedCards>
           </Container>
 
           {/* Setup */}
           <Container id="setup" className="reveal scroll-mt-28">
             <SectionTitle title="quick start" sub="training in minutes" />
-            <div className="mx-auto mt-14 flex max-w-[760px] flex-col gap-4 md:mt-16">
+            <StackedCards className="mx-auto mt-14 max-w-[760px] gap-4 md:mt-16">
               <SetupStep n={1} title="download Crank" body="on the App Store">
                 <MockCard className="flex w-full max-w-[260px] items-center gap-3">
                   <AppIcon app="crank" className="w-12" />
@@ -309,14 +309,14 @@ export default function Page() {
                   </ul>
                 </MockCard>
               </SetupStep>
-            </div>
+            </StackedCards>
           </Container>
 
           {/* Apps */}
           <Container id="apps" className="reveal scroll-mt-28">
             <SectionTitle title="one studio" sub="starting with Crank" />
-            <div className="mt-14 grid gap-4 md:mt-16 lg:grid-cols-3">
-              <Panel className="grid md:grid-cols-2 lg:col-span-2">
+            <div className="mt-14 grid gap-4 md:mt-16">
+              <Panel className="grid md:grid-cols-2">
                 <div className="flex flex-col items-start justify-center gap-5 p-8 md:p-12">
                   <AppIcon app="crank" className="w-14" />
                   <h3 className="text-title">
@@ -337,28 +337,7 @@ export default function Page() {
                 </div>
               </Panel>
 
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-                {teasers.map((t) => (
-                  <Panel key={t.app} className="flex flex-col justify-between gap-10 p-8">
-                    <AppIcon app={t.app} className="w-14 blur-[3px] grayscale-[0.4]" />
-                    <div>
-                      <h3 className="text-title">
-                        {t.name}{" "}
-                        <span className="block text-dim">in development</span>
-                      </h3>
-                      <p className="mt-3 text-sm leading-relaxed text-dim">{t.hint}</p>
-                      <a
-                        href={WAITLIST}
-                        className="mt-3 inline-flex min-h-10 items-center text-sm underline-offset-4 hover:underline"
-                      >
-                        join the waitlist ↗
-                      </a>
-                    </div>
-                  </Panel>
-                ))}
-              </div>
-
-              <Panel id="friggy" className="grid scroll-mt-28 md:grid-cols-2 lg:col-span-3">
+              <Panel id="friggy" className="grid scroll-mt-28 md:grid-cols-2">
                 <div className="order-2 flex h-[380px] justify-center overflow-hidden pt-10 md:order-1 md:h-[480px]">
                   <Phone className="w-[250px]">
                     <Shot
@@ -415,16 +394,19 @@ export default function Page() {
 
           {/* Pricing */}
           <Container id="pricing" className="reveal scroll-mt-28">
-            <SectionTitle title="no bulls**t pricing" sub="one plan, everything in it" />
+            <SectionTitle title="no bulls**t pricing" sub="one plan for Crank, everything in it" />
             <div className="mt-14 grid gap-4 md:mt-16 lg:grid-cols-2">
               <Panel className="flex flex-col justify-between gap-12 p-8 md:p-12">
                 <div>
                   <p className="text-stat">
-                    Ultra <span className="text-sm tracking-normal text-dim">the only plan</span>
+                    Ultra <span className="text-sm tracking-normal text-dim">Crank&apos;s only plan</span>
                   </p>
                   <p className="mt-6 max-w-[360px] text-sm leading-relaxed text-dim">
                     Eligible new subscribers start with a free trial. After that it&apos;s a yearly plan, or one payment
                     for lifetime. <span className="text-ink">Nothing is locked behind a higher tier.</span>
+                  </p>
+                  <p className="mt-3 max-w-[360px] text-sm leading-relaxed text-dim">
+                    Every emptea app has its own subscription. Crank Ultra covers Crank.
                   </p>
                 </div>
                 <Pill href={APP_STORE} arrow className="self-start">
@@ -432,7 +414,7 @@ export default function Page() {
                 </Pill>
               </Panel>
               <Panel className="p-8 md:p-12">
-                <h3 className="text-[22px] leading-tight tracking-[-0.03em]">everything in Ultra, included</h3>
+                <h3 className="text-[22px] leading-tight tracking-[-0.03em]">everything in Crank Ultra, included</h3>
                 <CheckList items={included} className="mt-6" />
                 <p className="mt-8 text-sm text-dim">
                   Something missing?{" "}

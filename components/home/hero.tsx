@@ -11,6 +11,7 @@ const INTERVAL = 6000;
 const tabs = [
   {
     label: "log sets in seconds",
+    short: "log sets",
     lead: "fast enough for between sets.",
     body: "88 ready-made plans or your own, last time's weight and reps already filled in.",
     src: "/screens/tracker.jpg",
@@ -18,6 +19,7 @@ const tabs = [
   },
   {
     label: "map every muscle",
+    short: "muscles",
     lead: "see what you trained.",
     body: "front and back, 14 muscles, colored by what you hit and what you skipped.",
     src: "/screens/body-front.jpg",
@@ -25,6 +27,7 @@ const tabs = [
   },
   {
     label: "chase your PRs",
+    short: "PRs",
     lead: "know where you stand.",
     body: "every lift graded from beginner to elite against lifters worldwide, with the gap to the next tier.",
     src: "/screens/standards.jpg",
@@ -32,6 +35,7 @@ const tabs = [
   },
   {
     label: "beat your friends",
+    short: "friends",
     lead: "lift for lift.",
     body: "leaderboards by workouts, volume, strength or streak, worldwide or your country.",
     src: "/screens/leaderboard-world.jpg",
@@ -114,11 +118,11 @@ export function Hero() {
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-paper" />
         </div>
 
-        {/* wraps to two rows on phones so every tab stays visible */}
+        {/* phones: one row of four equal segments with short labels; wider screens: full labels */}
         <div
           role="tablist"
           aria-label="What Crank does"
-          className="-mt-6 flex max-w-full flex-wrap justify-center gap-1 rounded-[26px] bg-panel p-1 sm:flex-nowrap sm:rounded-full"
+          className="-mt-6 grid w-full max-w-[360px] grid-cols-4 gap-1 rounded-full bg-panel p-1 sm:flex sm:w-auto sm:max-w-full"
         >
           {tabs.map((t, i) => (
             <button
@@ -145,14 +149,15 @@ export function Hero() {
                 tabRefs.current[next]?.focus();
               }}
               className={cn(
-                "relative shrink-0 cursor-pointer whitespace-nowrap rounded-full px-4 py-2.5 text-[13px] transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:px-5 sm:text-sm",
+                "relative min-w-0 shrink-0 cursor-pointer whitespace-nowrap rounded-full px-2 py-2.5 text-center text-[13px] transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:px-5 sm:text-sm",
                 i === active ? "text-ink" : "text-dim hover:text-ink",
               )}
             >
               {i === active && (
                 <span className="absolute inset-0 rounded-full bg-paper shadow-[0_4px_28px_rgba(0,0,0,0.07)]" />
               )}
-              <span className="relative">{t.label}</span>
+              <span className="relative sm:hidden">{t.short}</span>
+              <span className="relative hidden sm:inline">{t.label}</span>
             </button>
           ))}
         </div>

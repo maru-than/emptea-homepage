@@ -1,43 +1,31 @@
 import Image from "next/image";
-import { PersonStanding, Sunrise } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export const APP_STORE = "https://apps.apple.com/app/id6757124183";
-export const WAITLIST = "mailto:emptea.studios@gmail.com?subject=FlexMax%20and%20Rise%20waitlist";
 export const CONTACT = "mailto:emptea.studios@gmail.com";
 
 export const apps = {
   // Crank's real App Store icon (Classic): white Atlas figure on the #004A68 gradient.
-  crank: { name: "Crank", icon: null, image: "/crank-icon.png", from: "#1f5a7a", to: "#004a68" },
-  friggy: { name: "friggy", icon: null, image: "/friggy-icon.png", from: "#fffdf5", to: "#fffdf5" },
-  flexmax: { name: "FlexMax", icon: PersonStanding, image: null, from: "#5fdc8a", to: "#1f9e52" },
-  rise: { name: "Rise", icon: Sunrise, image: null, from: "#ffb27a", to: "#f0612e" },
+  crank: { name: "Crank", image: "/crank-icon.png", from: "#1f5a7a", to: "#004a68" },
+  friggy: { name: "friggy", image: "/friggy-icon.png", from: "#fffdf5", to: "#fffdf5" },
 };
 
 export type AppId = keyof typeof apps;
 
 /** App icon tile, sized by className width. */
 export function AppIcon({ app, className }: { app: AppId; className?: string }) {
-  const { icon: Icon, image, from, to, name } = apps[app];
+  const { image, from, to, name } = apps[app];
   return (
     <span
       role="img"
       aria-label={name}
       className={cn(
-        "relative flex aspect-square w-20 items-center justify-center overflow-hidden rounded-[22.5%] shadow-[0_6px_18px_-8px_rgba(0,0,0,0.24)]",
-        image && "ring-1 ring-inset ring-black/10",
+        "relative flex aspect-square w-20 items-center justify-center overflow-hidden rounded-[22.5%] shadow-[0_6px_18px_-8px_rgba(0,0,0,0.24)] ring-1 ring-inset ring-black/10",
         className,
       )}
       style={{ background: `linear-gradient(160deg, ${from}, ${to})` }}
     >
-      {image ? (
-        <Image src={image} alt="" fill sizes="96px" className="object-cover" />
-      ) : (
-        <>
-          <span className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent" />
-          {Icon && <Icon className="relative size-[46%] text-white" strokeWidth={2.25} />}
-        </>
-      )}
+      <Image src={image} alt="" fill sizes="96px" className="object-cover" />
     </span>
   );
 }
